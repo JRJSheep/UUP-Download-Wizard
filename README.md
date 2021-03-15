@@ -1,4 +1,4 @@
-# JRJSheep UUP Download Wizard；羊牌 UUP 下载向导（文件正在建设，计划 5 月 1 日完成）
+# JRJSheep UUP Download Wizard；羊牌 UUP 下载向导（文件正在建设，尚未完成，随时都会修改，计划 5 月 1 日完成）
 JRJSheep UUP Download Wizard；羊牌 UUP 下载向导（以下内容为向导自述文件的原文，尚待更改）
 
 羊牌 UUP 下载向导（程序名：UUP_download.cmd），是基于 uupdump 下载脚本设计开发的 uup 文件下载专用工具。
