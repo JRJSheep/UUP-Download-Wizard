@@ -16,9 +16,9 @@ set "all_proxy="
 
 :: 代理配置结束
 
-color f0
-
 cd /d "%~dp0"
+
+color f0
 
 :: 语言选择
 call files\lang.cmd -en
@@ -28,7 +28,7 @@ echo %line%
 echo %langwelcome%
 echo %line%
 echo.
-echo     1 - %lang1%
+echo     1 - %lang%
 echo.
 echo     2 - %lang2%
 echo.
@@ -47,9 +47,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.1"
+set "Ver=2.2"
 set "Ver1=v%Ver%"
-set "udBuild=315"
+set "udBuild=350"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeB%"
@@ -74,8 +74,8 @@ if NOT "%cd%"=="%cd: =%" (
     goto :EOF
 )
 
-if "[%1]" == "[49127c4b-02dc-482e-ac4f-ec4d659b7547]" goto :first
-REG QUERY HKU\S-1-5-19\Environment >NUL 2>&1 && goto :first
+if "[%1]" == "[49127c4b-02dc-482e-ac4f-ec4d659b7547]" goto :START_PROCESS
+REG QUERY HKU\S-1-5-19\Environment >NUL 2>&1 && goto :START_PROCESS
 
 set command="""%~f0""" 49127c4b-02dc-482e-ac4f-ec4d659b7547
 SETLOCAL ENABLEDELAYEDEXPANSION
@@ -85,17 +85,17 @@ powershell -NoProfile Start-Process -FilePath '%COMSPEC%' ^
 -ArgumentList '/c """!command!"""' -Verb RunAs 2>NUL
 
 IF %ERRORLEVEL% GTR 0 (
-    echo %line%
+    echo =====================================================
     echo %Admin%
-    echo %line%
+    echo =====================================================
     echo.
     pause
 )
 
-
 SETLOCAL DISABLEDELAYEDEXPANSION
 goto :EOF
 
+:START_PROCESS
 set "aria2=files\aria2c.exe"
 set "aria2Script=files\aria2_script.%random%.txt"
 set "a7z=files\7zr.exe"
@@ -104,10 +104,11 @@ set "destDir=UUPs"
 
 :: 网络预先设置
 
-:first
-cls
 title %title% %Ver1% - %Purpose%
 
+:: 网络预先设置
+:first
+cls
 echo %line%
 echo %WelcomeTitle%
 echo %line%
@@ -128,7 +129,7 @@ echo.
 echo.
 echo %WizInfo%
 echo %line2%
-echo %WizVer% %Ver% ^(%Build% %udBuild%^)
+echo %WizVer% %Ver% ^(%Build% %udBuild%^) %EditionApplicableDesA%%PurposeB% %EditionApplicableDesC%
 echo %LangVer% ^(%LVer1%%LangVer2%%LVer2%^)
 echo.
 echo ^(c^) 2016-2021 %CopyRight%
@@ -243,10 +244,10 @@ echo %line2%
 echo %COMBD%
 echo    8 - %CombBuild%
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq 9 goto :unsupportedition
+if %SKU% geq C goto :unsupportedition
 if %SKU% equ 8 goto :chooseeditiongroup
 if %SKU% equ 7 (set SKU=professionaln&goto :setupdateid)
 if %SKU% equ 6 (set SKU=coren&goto :setupdateid)
@@ -255,7 +256,11 @@ if %SKU% equ 4 (set SKU=ppipro&goto :setupdateid)
 if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
 if %SKU% equ 1 (set SKU=core&goto :setupdateid)
-if %SKU% lss 1 goto :unsupportedition
+if %SKU% lss 0 goto :unsupportedition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooselang
+if %SKU% equ A goto :chooselang
 
 :: 选择版本组合
 :chooseeditiongroup
@@ -287,6 +292,7 @@ echo    6 - %CCNPPN%
 echo    7 - %CCNPPNT%
 echo.
 echo.
+echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
 if %SKU% geq 8 goto :unsupportedition
@@ -298,14 +304,16 @@ if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdatei
 if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportedition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooseedition
+if %SKU% equ A goto :chooseedition
 
 :: 不支持版本警告
 :unsupportedition
 cls
 title %title% %Ver1% - %Purpose% - %UnsupportedSKU%
 
-echo %line%
-echo %WarTitle%
 echo %line%
 echo.
 echo.
@@ -416,7 +424,7 @@ echo  6 - 19042.572 ^(20H2_release %TeamBranch%^)
 echo.
 echo.
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
 if %Team% equ 6 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
@@ -425,6 +433,10 @@ if %Team% equ 4 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
 if %Team% equ 3 (set id=5d2cc5fc-1fbf-40f6-8f60-692faf474e17&goto :uupdownload)
 if %Team% equ 2 (set id=022ecdb0-4b73-4e43-9d1a-47d65aeeed95&goto :uupdownload)
 if %Team% equ 1 (set id=300ae013-034b-4cf7-9ed5-d64da6099127&goto :uupdownload)
+if %Team% equ b goto :first
+if %Team% equ B goto :first
+if %Team% equ a goto :chooseedition
+if %Team% equ A goto :chooseedition
 
 :uupdownload
 cls
@@ -463,9 +475,9 @@ if NOT EXIST ConvertConfig.ini set error=4&goto :ERROR
 cls
 title %title% %Ver1% - %Purpose% - %ConvertCmd%
 
-echo %line%
+echo ===============================================================================
 echo %PrepConverter%
-echo %line%
+echo ===============================================================================
 "%a7z%" -x!ConvertConfig.ini -y x "%uupConv%" >NUL
 echo.
 
@@ -564,8 +576,8 @@ echo.
 )
 
 :dlang
-if /i %dlang%==1 call files\lang.cmd -en & exit /b
-if /i %dlang%==2 call files\lang.cmd -cn & exit /b
+if /i %dlang%==1 call files\lang.cmd -en && exit /b
+if /i %dlang%==2 call files\lang.cmd -cn && exit /b
 exit /b
 
 :langver
