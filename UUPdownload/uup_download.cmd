@@ -26,7 +26,7 @@ echo %line%
 echo %langwelcome%
 echo %line%
 echo.
-echo     1 - %lang1%
+echo     1 - %lang%
 echo.
 echo     2 - %lang2%
 echo.
@@ -48,9 +48,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.1"
+set "Ver=2.2"
 set "Ver1=v%Ver%"
-set "udBuild=315"
+set "udBuild=350"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeA%"
@@ -92,7 +92,7 @@ echo.
 echo.
 echo %WizInfo%
 echo %line2%
-echo %WizVer% %Ver% ^(%Build% %udBuild%^)
+echo %WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo %LangVer% ^(%LVer1%%LangVer2%%LVer2%^)
 echo.
 echo ^(c^) 2016-2021 %CopyRight%
@@ -208,10 +208,10 @@ echo %line2%
 echo %COMBD%
 echo    8 - %CombBuild%
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq 9 goto :unsupportedition
+if %SKU% geq C goto :unsupportedition
 if %SKU% equ 8 goto :chooseeditiongroup
 if %SKU% equ 7 (set SKU=professionaln&goto :setupdateid)
 if %SKU% equ 6 (set SKU=coren&goto :setupdateid)
@@ -220,7 +220,11 @@ if %SKU% equ 4 (set SKU=ppipro&goto :setupdateid)
 if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
 if %SKU% equ 1 (set SKU=core&goto :setupdateid)
-if %SKU% lss 1 goto :unsupportedition
+if %SKU% lss 0 goto :unsupportedition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooselang
+if %SKU% equ A goto :chooselang
 
 :: 选择版本组合
 :chooseeditiongroup
@@ -252,7 +256,7 @@ echo    6 - %CCNPPN%
 echo    7 - %CCNPPNT%
 echo.
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
 if %SKU% geq 8 goto :unsupportedition
@@ -264,6 +268,10 @@ if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdatei
 if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportedition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooseedition
+if %SKU% equ A goto :chooseedition
 
 :: 选择 Windows 10X 的更新 ID
 :chooseliteedition
@@ -295,13 +303,17 @@ echo.
 echo.
 echo.
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
 if %Team% equ 4 (set id=8b7b4e7d-aff1-4f0d-a824-26ce5ebdeaad&goto :uupdownload)
 if %Team% equ 3 (set id=0bcb1e4d-f873-401a-9751-850e6b81965e&goto :uupdownload)
 if %Team% equ 2 (set id=fa8904cc-582a-4aa1-81c3-d4c48d8f72e8&goto :uupdownload)
 if %Team% equ 1 (set id=32a17882-1cf3-4432-a161-749626328dfb&goto :uupdownload)
+if %Team% equ b goto :first
+if %Team% equ B goto :first
+if %Team% equ a goto :chooselang
+if %Team% equ A goto :chooselang
 
 :: 不支持版本警告
 :unsupportedition
@@ -423,7 +435,7 @@ echo.
 echo.
 echo.
 echo.
-echo.
+echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
 if %Team% equ 6 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
@@ -432,6 +444,10 @@ if %Team% equ 4 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
 if %Team% equ 3 (set id=5d2cc5fc-1fbf-40f6-8f60-692faf474e17&goto :uupdownload)
 if %Team% equ 2 (set id=022ecdb0-4b73-4e43-9d1a-47d65aeeed95&goto :uupdownload)
 if %Team% equ 1 (set id=300ae013-034b-4cf7-9ed5-d64da6099127&goto :uupdownload)
+if %Team% equ b goto :first
+if %Team% equ B goto :first
+if %Team% equ a goto :chooseedition
+if %Team% equ A goto :chooseedition
 
 :uupdownload
 cls
