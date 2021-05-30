@@ -47,9 +47,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.2"
+set "Ver=2.3"
 set "Ver1=v%Ver%"
-set "udBuild=350"
+set "udBuild=370"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeB%"
@@ -116,10 +116,10 @@ echo %WelDes%
 echo.
 echo.
 echo.
-echo     1 - %Def%
+echo     A - %Def%
 echo.
 echo.
-echo     2 - %Alter%
+echo     B - %Alter%
 echo.
 echo.
 echo.
@@ -137,8 +137,8 @@ echo %VerDes%
 echo.
 echo %line%
 set /p Network=%TxtDes1%
-if %Network% equ 2 (set "cert=--check-certificate=false "&goto :chooselang)
-if %Network% equ 1 (set "cert= "&goto :chooselang)
+if %Network% equ B (set "cert=--check-certificate=false "&goto :chooselang)
+if %Network% equ A (set "cert= "&goto :chooselang)
 
 :: 选择语言
 :chooselang
@@ -392,6 +392,7 @@ echo.
 echo.
 echo %line2%
 echo %IDExample%abcd1234-b123-c123-d123-abcdef123456
+echo %line2%
 echo.
 echo.
 set /p id=%FillID%
@@ -408,31 +409,35 @@ echo %line%
 echo %TeamDes%
 echo.
 echo.
-echo  1 - 19041.350 ^(vb_release_svc_team_flight^)
+echo  1 - 19042.538 ^(20H2_release %TeamBranch%^)
 echo.
-echo  2 - 19041.396 ^(vb_release_svc_team_flight^)
+echo  2 - 19042.545 ^(20H2_release %TeamBranch%^)
 echo.
-echo  3 - 19041.460 ^(vb_release_svc_team_flight^)
+echo  3 - 19042.572 ^(20H2_release %TeamBranch%^)
 echo.
-echo %Team20H2%
+echo %TeamDevDes%
 echo.
-echo  4 - 19042.538 ^(20H2_release %TeamBranch%^)
+echo  4 - 19100.1008 ^(vb_release_svc_team_flight^)
 echo.
-echo  5 - 19042.545 ^(20H2_release %TeamBranch%^)
+echo  5 - 19100.1019 ^(vb_release_svc_team_flight^)
 echo.
-echo  6 - 19042.572 ^(20H2_release %TeamBranch%^)
+echo %TeamSVC%
+echo.
+echo  E - 19100.1009 ^(vb_release_svc_team_flight^)
+echo.
+echo.
 echo.
 echo.
 echo.
 echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
-if %Team% equ 6 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
-if %Team% equ 5 (set id=8b2d3ddf-f617-4df4-a1da-15dcbf0e757c&goto :uupdownload)
-if %Team% equ 4 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
-if %Team% equ 3 (set id=5d2cc5fc-1fbf-40f6-8f60-692faf474e17&goto :uupdownload)
-if %Team% equ 2 (set id=022ecdb0-4b73-4e43-9d1a-47d65aeeed95&goto :uupdownload)
-if %Team% equ 1 (set id=300ae013-034b-4cf7-9ed5-d64da6099127&goto :uupdownload)
+if %Team% equ E (set id=87364f44-95b4-4bf0-917e-5b28f266610d&goto :uupdownload)
+if %Team% equ 5 (set id=40a6c352-b0f4-49a6-a0c3-3dc1537e1d3f&goto :uupdownload)
+if %Team% equ 4 (set id=1503c1dc-82c3-4ebd-8299-afd449411884&goto :uupdownload)
+if %Team% equ 3 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
+if %Team% equ 2 (set id=8b2d3ddf-f617-4df4-a1da-15dcbf0e757c&goto :uupdownload)
+if %Team% equ 1 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
 if %Team% equ b goto :first
 if %Team% equ B goto :first
 if %Team% equ a goto :chooseedition
