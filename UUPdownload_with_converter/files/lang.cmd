@@ -9,8 +9,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer1=2.2"
-set "LVer2=Build 350"
+set "LVer1=2.3"
+set "LVer2=Build 370"
 exit /b
 
 :english
@@ -131,6 +131,7 @@ set "TeamTitle=                         Team Edition, version 2004 and above - U
 set "TeamDes=This page selects the Team Edition of UUP files download. The Team Edition is an unconventional & echo Edition, you don't need to fill in the update ID, just select the Edition from the menu to start downloading."
 set "Team20H2=The following Builds are Team Edition, Version 20H2: "
 set "TeamBranch=and related branches"
+set "TeamSVC=The follow builds are only provide 29 languages, not all languages:"
 
 set "W10XTitle=                              Windows 10X - Update ID selection ^(Download Only^)"
 set "W10XDes=This page selects the Windows 10X of UUP files download. The Windows 10X is an unconventional Edition, you don't & echo need to fill in the update ID, just select the Edition from the menu to start downloading. & echo Currently, only 4 Editions of Build 20279.1002 are available for download. "
@@ -273,6 +274,7 @@ set "TeamTitle=                         协同版，版本 2004 及以上——更新 ID 选择
 set "TeamDes=此页选择协同版的 UUP 文件下载。协同版非常规版本，你不需要填写更新 ID，仅需从菜单 & echo 中选择版本即可开始下载。"
 set "Team20H2=以下是协同版，版本 20H2："
 set "TeamBranch=和相关分支"
+set "TeamSVC=以下版本仅提供 29 种语言，非全语言："
 
 set "W10XTitle=                            Windows 10X——更新 ID 选择（仅下载）"
 set "W10XDes=此页选择 Windows 10X 的 UUP 文件下载。Windows 10X 非常规版本，你不需要填写更新 ID，仅需从菜 & echo 单中选择版本即可开始下载。目前仅有 Build 20279.1002 一个内部版本的 4 种版本下载。& echo."
