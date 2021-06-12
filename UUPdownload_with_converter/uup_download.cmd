@@ -47,9 +47,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.3"
+set "Ver=2.4"
 set "Ver1=v%Ver%"
-set "udBuild=370"
+set "udBuild=400"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeB%"
@@ -530,6 +530,7 @@ echo.
 echo  %ErrorTxt2%
 echo.
 echo  %FileExample%files
+start https://aria2.github.io/
 )
 
 :download_error
