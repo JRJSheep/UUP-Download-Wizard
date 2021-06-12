@@ -48,9 +48,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.3"
+set "Ver=2.4"
 set "Ver1=v%Ver%"
-set "udBuild=370"
+set "udBuild=400"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeA%"
@@ -136,8 +136,7 @@ echo %LangMenu18%
 echo %LangMenu19%
 echo %line%
 set /p Lang=%TxtDes1%
-if %Lang% geq 40 goto :unsupportlang
-if %Lang% equ 39 (set Lang=en-us&set SKU=lite&goto :chooseliteedition)
+if %Lang% geq 39 goto :unsupportlang
 if %Lang% equ 38 (set Lang=zh-tw&goto :chooseedition)
 if %Lang% equ 37 (set Lang=zh-cn&goto :chooseedition)
 if %Lang% equ 36 (set Lang=it-it&goto :chooseedition)
@@ -273,48 +272,6 @@ if %SKU% equ B goto :first
 if %SKU% equ a goto :chooseedition
 if %SKU% equ A goto :chooseedition
 
-:: 选择 Windows 10X 的更新 ID
-:chooseliteedition
-cls
-title %title% %Ver1% - %Purpose% - %Select10XID%
-
-echo %line%
-echo %W10XTitle%
-echo %line%
-echo %W10XDes%
-echo.
-echo  1 - 20279.1002 ^(fe_release_10x%prod64%^)
-echo.
-echo  2 - 20279.1002 ^(fe_release_10x%test64%^)
-echo.
-echo  3 - 20279.1002 ^(fe_release_10x%prodarm64%^)
-echo.
-echo  4 - 20279.1002 ^(fe_release_10x%testarm64%^)
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo %StepDescription%
-echo %line%
-set /p Team=%TxtDes1%
-if %Team% equ 4 (set id=8b7b4e7d-aff1-4f0d-a824-26ce5ebdeaad&goto :uupdownload)
-if %Team% equ 3 (set id=0bcb1e4d-f873-401a-9751-850e6b81965e&goto :uupdownload)
-if %Team% equ 2 (set id=fa8904cc-582a-4aa1-81c3-d4c48d8f72e8&goto :uupdownload)
-if %Team% equ 1 (set id=32a17882-1cf3-4432-a161-749626328dfb&goto :uupdownload)
-if %Team% equ b goto :first
-if %Team% equ B goto :first
-if %Team% equ a goto :chooselang
-if %Team% equ A goto :chooselang
-
 :: 不支持版本警告
 :unsupportedition
 cls
@@ -399,12 +356,13 @@ echo.
 echo.
 echo %line2%
 echo %IDExample%abcd1234-b123-c123-d123-abcdef123456
+echo %line2%
 echo.
 echo.
 set /p id=%FillID%
 set "id=%id%"&goto :uupdownload
 
-:: 选择协同版，版本 2004 更新 ID
+:: 选择协同版更新 ID
 :chooseupdateidteam
 cls
 title %title% %Ver1% - %Purpose% - %SelectTeamID%
@@ -475,7 +433,7 @@ echo %line%
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 pause
-goto :EOF
+
 
 :ERROR
 cls
@@ -491,22 +449,14 @@ if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 echo.
 echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
 echo %line%
-pause > nul
-exit /b
+pause
+
+
 
 :aria_error
 if %error% equ 1 (
-echo  %ErrorTxt1%
+echo  %ErrorTxt1% %aria2%%ErrorTxt11%
 echo.
 echo.
 echo.
@@ -518,6 +468,15 @@ echo.
 echo  %ErrorTxt2%
 echo.
 echo  %FileExample%files
+start https://aria2.github.io/
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 )
 
 :download_error
@@ -529,6 +488,15 @@ echo.
 echo  %ErrorTxt3%
 echo.
 echo  %ErrorTxt4%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 echo.
 echo.
 echo.
@@ -547,6 +515,15 @@ echo.
 echo  %ErrorTxt6%
 echo.
 echo  %ErrorTxt7%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 echo.
 echo.
 echo.
