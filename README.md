@@ -106,3 +106,8 @@ https://uupdump.net/ - 下载工具原始版本（任意版本均可生成），
 abbodi1406 - UUP converter wimlib 作者，感谢其不断更新和完善相关工具。
 
 正义羊（JRJSheep） - 菜单和界面设计，版本参数控制及后续测试
+
+许可授权
+===============================================================================
+本工具向导使用 MIT 许可进行授权。
+https://github.com/JRJSheep/UUP-Download-Wizard/blob/main/LICENSE
