@@ -48,9 +48,9 @@ set "SKU="
 set "cert=--check-certificate=false "
 
 :: 版本指示内容
-set "Ver=2.5"
+set "Ver=2.6"
 set "Ver1=v%Ver%"
-set "udBuild=440.1"
+set "udBuild=448.1"
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeA%"
@@ -95,7 +95,7 @@ echo %line2%
 echo %WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo %LangVer% ^(%LVer1%%LangVer2%%LVer2%^)
 echo.
-echo ^(c^) 2016-2021 %CopyRight%
+echo ^(c^) 2016-2022 %CopyRight%
 echo %VerDes%
 echo.
 echo %line%
@@ -175,41 +175,47 @@ echo %LangMenu18%
 echo %LangMenu19%
 echo %line%
 set /p Lang=%TxtDes1%
-if %Lang% geq 39 goto :unsupportlang
+if %Lang% geq 45 goto :unsupportlang
+if %Lang% equ 44 (set Lang=neutral&goto :chooseclientedition)
+if %Lang% equ 43 (set Lang=ca-es&goto :chooseclientedition)
+if %Lang% equ 42 (set Lang=eu-es&goto :chooseclientedition)
+if %Lang% equ 41 (set Lang=vi-vn&goto :chooseclientedition)
+if %Lang% equ 40 (set Lang=id-id&goto :chooseclientedition)
+if %Lang% equ 39 (set Lang=gl-es&goto :chooseclientedition)
 if %Lang% equ 38 (set Lang=zh-tw&goto :chooseclientedition)
 if %Lang% equ 37 (set Lang=zh-cn&goto :chooseclientedition)
 if %Lang% equ 36 (set Lang=it-it&goto :chooseclientedition)
 if %Lang% equ 35 (set Lang=en-gb&goto :chooseclientedition)
 if %Lang% equ 34 (set Lang=en-us&goto :chooseclientedition)
-if %Lang% equ 33 (set Lang=hu-hu&goto :chooseclienteditiongroup)
-if %Lang% equ 32 (set Lang=he-il&goto :chooseclienteditiongroup)
-if %Lang% equ 31 (set Lang=el-gr&goto :chooseclienteditiongroup)
-if %Lang% equ 30 (set Lang=es-es&goto :chooseclienteditiongroup)
-if %Lang% equ 29 (set Lang=es-mx&goto :chooseclienteditiongroup)
-if %Lang% equ 28 (set Lang=uk-ua&goto :chooseclienteditiongroup)
-if %Lang% equ 27 (set Lang=tr-tr&goto :chooseclienteditiongroup)
-if %Lang% equ 26 (set Lang=th-th&goto :chooseclienteditiongroup)
-if %Lang% equ 25 (set Lang=sl-si&goto :chooseclienteditiongroup)
-if %Lang% equ 24 (set Lang=sk-sk&goto :chooseclienteditiongroup)
-if %Lang% equ 23 (set Lang=sr-latn-rs&goto :chooseclienteditiongroup)
-if %Lang% equ 22 (set Lang=sv-se&goto :chooseclienteditiongroup)
-if %Lang% equ 21 (set Lang=ja-jp&goto :chooseclienteditiongroup)
-if %Lang% equ 20 (set Lang=pt-pt&goto :chooseclienteditiongroup)
-if %Lang% equ 19 (set Lang=pt-br&goto :chooseclienteditiongroup)
-if %Lang% equ 18 (set Lang=nb-no&goto :chooseclienteditiongroup)
-if %Lang% equ 17 (set Lang=ro-ro&goto :chooseclienteditiongroup)
-if %Lang% equ 16 (set Lang=lt-lt&goto :chooseclienteditiongroup)
-if %Lang% equ 15 (set Lang=lv-lv&goto :chooseclienteditiongroup)
-if %Lang% equ 14 (set Lang=hr-hr&goto :chooseclienteditiongroup)
-if %Lang% equ 13 (set Lang=cs-cz&goto :chooseclienteditiongroup)
-if %Lang% equ 12 (set Lang=nl-nl&goto :chooseclienteditiongroup)
-if %Lang% equ 11 (set Lang=fr-ca&goto :chooseclienteditiongroup)
-if %Lang% equ 10 (set Lang=fr-fr&goto :chooseclienteditiongroup)
-if %Lang% equ 09 (set Lang=fi-fi&goto :chooseclienteditiongroup)
-if %Lang% equ 08 (set Lang=ru-ru&goto :chooseclienteditiongroup)
-if %Lang% equ 07 (set Lang=de-de&goto :chooseclienteditiongroup)
-if %Lang% equ 06 (set Lang=da-dk&goto :chooseclienteditiongroup)
-if %Lang% equ 05 (set Lang=ko-kr&goto :chooseclienteditiongroup)
+if %Lang% equ 33 (set Lang=hu-hu&goto :chooseclientedition)
+if %Lang% equ 32 (set Lang=he-il&goto :chooseclientedition)
+if %Lang% equ 31 (set Lang=el-gr&goto :chooseclientedition)
+if %Lang% equ 30 (set Lang=es-es&goto :chooseclientedition)
+if %Lang% equ 29 (set Lang=es-mx&goto :chooseclientedition)
+if %Lang% equ 28 (set Lang=uk-ua&goto :chooseclientedition)
+if %Lang% equ 27 (set Lang=tr-tr&goto :chooseclientedition)
+if %Lang% equ 26 (set Lang=th-th&goto :chooseclientedition)
+if %Lang% equ 25 (set Lang=sl-si&goto :chooseclientedition)
+if %Lang% equ 24 (set Lang=sk-sk&goto :chooseclientedition)
+if %Lang% equ 23 (set Lang=sr-latn-rs&goto :chooseclientedition)
+if %Lang% equ 22 (set Lang=sv-se&goto :chooseclientedition)
+if %Lang% equ 21 (set Lang=ja-jp&goto :chooseclientedition)
+if %Lang% equ 20 (set Lang=pt-pt&goto :chooseclientedition)
+if %Lang% equ 19 (set Lang=pt-br&goto :chooseclientedition)
+if %Lang% equ 18 (set Lang=nb-no&goto :chooseclientedition)
+if %Lang% equ 17 (set Lang=ro-ro&goto :chooseclientedition)
+if %Lang% equ 16 (set Lang=lt-lt&goto :chooseclientedition)
+if %Lang% equ 15 (set Lang=lv-lv&goto :chooseclientedition)
+if %Lang% equ 14 (set Lang=hr-hr&goto :chooseclientedition)
+if %Lang% equ 13 (set Lang=cs-cz&goto :chooseclientedition)
+if %Lang% equ 12 (set Lang=nl-nl&goto :chooseclientedition)
+if %Lang% equ 11 (set Lang=fr-ca&goto :chooseclientedition)
+if %Lang% equ 10 (set Lang=fr-fr&goto :chooseclientedition)
+if %Lang% equ 09 (set Lang=fi-fi&goto :chooseclientedition)
+if %Lang% equ 08 (set Lang=ru-ru&goto :chooseclientedition)
+if %Lang% equ 07 (set Lang=de-de&goto :chooseclientedition)
+if %Lang% equ 06 (set Lang=da-dk&goto :chooseclientedition)
+if %Lang% equ 05 (set Lang=ko-kr&goto :chooseclientedition)
 if %Lang% equ 04 (set Lang=pl-pl&goto :chooseclientedition)
 if %Lang% equ 03 (set Lang=bg-bg&goto :chooseclientedition)
 if %Lang% equ 02 (set Lang=et-ee&goto :chooseclientedition)
@@ -314,10 +320,10 @@ if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
 if %SKU% equ 1 (set SKU=core&goto :setupdateid)
 if %SKU% lss 0 goto :unsupportedition
-if %SKU% equ b goto :first
-if %SKU% equ B goto :first
-if %SKU% equ a goto :clientlang
-if %SKU% equ A goto :clientlang
+if %SKU% equ h goto :first
+if %SKU% equ H goto :first
+if %SKU% equ b goto :clientlang
+if %SKU% equ B goto :clientlang
 
 :: 选择客户端版本组合
 :chooseclienteditiongroup
@@ -361,10 +367,10 @@ if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdatei
 if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportclientedition
-if %SKU% equ b goto :first
-if %SKU% equ B goto :first
-if %SKU% equ a goto :chooseclientedition
-if %SKU% equ A goto :chooseclientedition
+if %SKU% equ h goto :first
+if %SKU% equ H goto :first
+if %SKU% equ b goto :chooseclientedition
+if %SKU% equ B goto :chooseclientedition
 
 :: 选择服务器版本
 :chooseserveredition
@@ -408,10 +414,10 @@ if %SKU% equ 3 (set "SKU=serverdatacentercore"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandardcore"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ b goto :first
-if %SKU% equ B goto :first
-if %SKU% equ a goto :langserver
-if %SKU% equ A goto :langserver
+if %SKU% equ h goto :first
+if %SKU% equ H goto :first
+if %SKU% equ b goto :langserver
+if %SKU% equ B goto :langserver
 
 :: 选择服务器版本组合
 :chooseservereditiongroup
@@ -453,10 +459,10 @@ if %SKU% equ 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandard;serverdatacenter"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ b goto :first
-if %SKU% equ B goto :first
-if %SKU% equ a goto :chooseserveredition
-if %SKU% equ A goto :chooseserveredition
+if %SKU% equ h goto :first
+if %SKU% equ H goto :first
+if %SKU% equ b goto :chooseserveredition
+if %SKU% equ B goto :chooseserveredition
 
 :: 不支持客户端版本警告
 :unsupportclientedition
@@ -530,7 +536,7 @@ set /p choosemenu=%ContExit%
 if %choosemenu% equ 2 (color f0 & goto :chooseservereditiongroup)
 if %choosemenu% equ 1 (color f0 & goto :chooseserveredition)
 
-::  不支持客户端语言版本警告
+:: 不支持客户端语言版本警告
 :unsupportclientlang
 cls
 title %title% %Ver1% - %Purpose% - %UnsupportedLang%
@@ -565,7 +571,7 @@ echo %line%
 set /p choosemenu=%ContExit%
 if %choosemenu% equ 1 (color f0 & goto :clientlang)
 
-::  不支持服务器语言版本警告
+:: 不支持服务器语言版本警告
 :unsupportserverlang
 cls
 title %title% %Ver1% - %Purpose% - %UnsupportedLang%
