@@ -18,6 +18,11 @@ set "all_proxy="
 
 color f0
 
+:: 版本指示内容
+set "Ver=2.7"
+set "Ver1=v%Ver%"
+set "udBuild=464.1"
+
 :: 语言选择
 call files\lang.cmd -en
 title %langchoose%
@@ -26,11 +31,11 @@ echo %line%
 echo %langwelcome%
 echo %line%
 echo.
-echo     1 - %lang%
+echo     1 - %lang1%
 echo.
 echo     2 - %lang2%
 echo.
-echo.
+echo %WizVer% %Ver% ^(%Build% %udBuild%^)
 echo %line2%
 set /p dlang=%dlangtxt%
 if %dlang% equ 1 (set dlang=1 & call :dlang)
@@ -47,10 +52,7 @@ set "Lang="
 set "SKU="
 set "cert=--check-certificate=false "
 
-:: 版本指示内容
-set "Ver=2.6"
-set "Ver1=v%Ver%"
-set "udBuild=448.1"
+:: SKU 指示内容
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
 set "Purpose=%PurposeA%"
@@ -649,7 +651,7 @@ echo  14 - 19100.1041  15 - 19100.1045  16 - 19100.1047  17 - 19100.1050  18 - 1
 echo.
 echo  19 - 19100.1055  20 - 19100.1057  21 - 19100.1060  22 - 19100.1062  23 - 19100.1064
 echo.
-echo  24 - 19100.1065  25 - 19100.1066  26 - 19100.1067
+echo  24 - 19100.1065  25 - 19100.1066  26 - 19100.1067  27 - 19100.1070
 echo.
 echo %TeamSVC%
 echo.
@@ -659,6 +661,7 @@ echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
+if %Team% equ 27 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
 if %Team% equ 26 (set id=2bf7a0c9-a2b0-4333-a3e8-7eed56f0e897&goto :uupdownload)
 if %Team% equ 25 (set id=61ab3641-436e-4f6a-9999-0be13c098849&goto :uupdownload)
 if %Team% equ 24 (set id=ab2ce6b7-8edf-4e47-9131-d71aa5600cba&goto :uupdownload)
@@ -734,9 +737,7 @@ echo.
 echo.
 echo %line%
 pause
-exit /b
-
-
+goto :EOF
 
 :aria_error
 if %error% equ 1 (
@@ -820,4 +821,7 @@ exit /b
 
 :langver
 if /i %LVer%==1 call files\lang.cmd -LVer && exit /b
+exit /b
+
+:EOF
 exit /b
