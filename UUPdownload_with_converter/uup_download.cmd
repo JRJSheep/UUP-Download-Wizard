@@ -20,23 +20,7 @@ cd /d "%~dp0"
 
 color f0
 
-:: 语言选择
 call files\lang.cmd -en
-title %langchoose%
-
-echo %line%
-echo %langwelcome%
-echo %line%
-echo.
-echo     1 - %lang%
-echo.
-echo     2 - %lang2%
-echo.
-echo.
-echo %line2%
-set /p dlang=%dlangtxt%
-if %dlang% equ 1 (set dlang=1 & call :dlang)
-if %dlang% equ 2 (set dlang=2 & call :dlang)
 
 set LVer=1 && call :langver
 
@@ -48,24 +32,10 @@ set "cert=--check-certificate=false "
 set "bckps="
 
 :: 版本指示内容
-set "Ver=2.6"
+set "Ver=2.7"
 set "Ver1=v%Ver%"
-set "udBuild=448.1"
-set "PurposeA=%PurposeA%"
-set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeB%"
+set "udBuild=464.1"
 
-:: 步骤明细
-set "SelectLang=%SelectLang%"
-set "SelectSKU1=%SelectSKU%"
-set "SelectSKUGroup=%SelectSKUGroup%"
-set "UnsupportedSKU=%UnsupportedSKU%"
-set "UnsupportedLang=%UnsupportedLang%"
-set "WriteBuildID=%WriteBuildID%"
-set "SelectTeamID=%SelectTeamID%"
-set "SearchUpdScript=%SearchUpdScript%"
-set "DLUUPFiles=%DLUUPFiles%"
-set "FoundError=%FoundError%"
 
 if NOT "%cd%"=="%cd: =%" (
     echo %PathSpace1%
@@ -75,8 +45,8 @@ if NOT "%cd%"=="%cd: =%" (
     goto :EOF
 )
 
-if "[%1]" == "[49127c4b-02dc-482e-ac4f-ec4d659b7547]" goto :START_PROCESS
-REG QUERY HKU\S-1-5-19\Environment >NUL 2>&1 && goto :START_PROCESS
+if "[%1]" == "[49127c4b-02dc-482e-ac4f-ec4d659b7547]" goto :Selectlang
+REG QUERY HKU\S-1-5-19\Environment >NUL 2>&1 && goto :Selectlang
 
 set command="""%~f0""" 49127c4b-02dc-482e-ac4f-ec4d659b7547
 SETLOCAL ENABLEDELAYEDEXPANSION
@@ -96,14 +66,45 @@ IF %ERRORLEVEL% GTR 0 (
 SETLOCAL DISABLEDELAYEDEXPANSION
 goto :EOF
 
-:START_PROCESS
+:: 语言选择
+:Selectlang
+title %langchoose%
+
+echo %line%
+echo %langwelcome%
+echo %line%
+echo.
+echo     1 - %lang1%
+echo.
+echo     2 - %lang2%
+echo.
+echo %WizVer% %Ver% ^(%Build% %udBuild%^)
+echo %line2%
+set /p dlang=%dlangtxt%
+if %dlang% equ 1 (set dlang=1 & call :dlang)
+if %dlang% equ 2 (set dlang=2 & call :dlang)
+
+:: 文件路径声明
 set "aria2=files\aria2c.exe"
 set "aria2Script=files\aria2_script.%random%.txt"
 set "a7z=files\7zr.exe"
 set "uupConv=files\uup-converter-wimlib_%langconverter%.7z"
 set "destDir=UUPs"
 
-:: 网络预先设置
+:: 步骤提示和类别声明
+set "PurposeA=%PurposeA%"
+set "PurposeB=%PurposeB%"
+set "Purpose=%PurposeB%"
+set "SelectLang=%SelectLang%"
+set "SelectSKU1=%SelectSKU%"
+set "SelectSKUGroup=%SelectSKUGroup%"
+set "UnsupportedSKU=%UnsupportedSKU%"
+set "UnsupportedLang=%UnsupportedLang%"
+set "WriteBuildID=%WriteBuildID%"
+set "SelectTeamID=%SelectTeamID%"
+set "SearchUpdScript=%SearchUpdScript%"
+set "DLUUPFiles=%DLUUPFiles%"
+set "FoundError=%FoundError%"
 
 title %title% %Ver1% - %Purpose%
 
@@ -133,7 +134,7 @@ echo %line2%
 echo %WizVer% %Ver% ^(%Build% %udBuild%^) %EditionApplicableDesA%%PurposeB% %EditionApplicableDesC%
 echo %LangVer% ^(%LVer1%%LangVer2%%LVer2%^)
 echo.
-echo ^(c^) 2016-2022 %CopyRight%
+echo ^(c^) 2016-2021 %CopyRight%
 echo %VerDes%
 echo.
 echo %line%
@@ -213,13 +214,7 @@ echo %LangMenu18%
 echo %LangMenu19%
 echo %line%
 set /p Lang=%TxtDes1%
-if %Lang% geq 45 goto :unsupportlang
-if %Lang% equ 44 (set Lang=neutral&goto :chooseclientedition)
-if %Lang% equ 43 (set Lang=ca-es&goto :chooseclientedition)
-if %Lang% equ 42 (set Lang=eu-es&goto :chooseclientedition)
-if %Lang% equ 41 (set Lang=vi-vn&goto :chooseclientedition)
-if %Lang% equ 40 (set Lang=id-id&goto :chooseclientedition)
-if %Lang% equ 39 (set Lang=gl-es&goto :chooseclientedition)
+if %Lang% geq 39 goto :unsupportlang
 if %Lang% equ 38 (set Lang=zh-tw&goto :chooseclientedition)
 if %Lang% equ 37 (set Lang=zh-cn&goto :chooseclientedition)
 if %Lang% equ 36 (set Lang=it-it&goto :chooseclientedition)
@@ -358,10 +353,10 @@ if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
 if %SKU% equ 1 (set SKU=core&goto :setupdateid)
 if %SKU% lss 0 goto :unsupportedition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
-if %SKU% equ b goto :clientlang
-if %SKU% equ B goto :clientlang
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :clientlang
+if %SKU% equ A goto :clientlang
 
 :: 选择客户端版本组合
 :chooseclienteditiongroup
@@ -405,10 +400,10 @@ if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdatei
 if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportclientedition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
-if %SKU% equ b goto :chooseclientedition
-if %SKU% equ B goto :chooseclientedition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooseclientedition
+if %SKU% equ A goto :chooseclientedition
 
 :: 选择服务器版本
 :chooseserveredition
@@ -452,10 +447,10 @@ if %SKU% equ 3 (set "SKU=serverdatacentercore"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandardcore"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
-if %SKU% equ b goto :langserver
-if %SKU% equ B goto :langserver
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :langserver
+if %SKU% equ A goto :langserver
 
 :: 选择服务器版本组合
 :chooseservereditiongroup
@@ -497,10 +492,10 @@ if %SKU% equ 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandard;serverdatacenter"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
-if %SKU% equ b goto :chooseserveredition
-if %SKU% equ B goto :chooseserveredition
+if %SKU% equ b goto :first
+if %SKU% equ B goto :first
+if %SKU% equ a goto :chooseserveredition
+if %SKU% equ A goto :chooseserveredition
 
 :: 不支持客户端版本警告
 :unsupportclientedition
@@ -687,7 +682,7 @@ echo  14 - 19100.1041  15 - 19100.1045  16 - 19100.1047  17 - 19100.1050  18 - 1
 echo.
 echo  19 - 19100.1055  20 - 19100.1057  21 - 19100.1060  22 - 19100.1062  23 - 19100.1064
 echo.
-echo  24 - 19100.1065  25 - 19100.1066  26 - 19100.1067
+echo  24 - 19100.1065  25 - 19100.1066  26 - 19100.1067  27 - 19100.1070
 echo.
 echo %TeamSVC%
 echo.
@@ -697,6 +692,7 @@ echo %StepDescription%
 echo %line%
 set /p Team=%TxtDes1%
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
+if %Team% equ 27 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
 if %Team% equ 26 (set id=2bf7a0c9-a2b0-4333-a3e8-7eed56f0e897&goto :uupdownload)
 if %Team% equ 25 (set id=61ab3641-436e-4f6a-9999-0be13c098849&goto :uupdownload)
 if %Team% equ 24 (set id=ab2ce6b7-8edf-4e47-9131-d71aa5600cba&goto :uupdownload)
@@ -782,10 +778,11 @@ goto :EOF
 :ERROR
 cls
 title %title% %Ver1% - %Purpose% - %FoundError%
-
+color f4
 echo %line%
 echo %ErrorTitle%
 echo %line%
+echo.
 echo.
 if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
@@ -793,17 +790,13 @@ if %error% equ 3 call :uup_error
 if %error% equ 4 call :no_file_error
 echo.
 echo.
-echo.
-echo.
-echo.
-echo.
 echo %line%
 pause
-exit /b
+goto :EOF
 
 :aria_error
 if %error% equ 1 (
-echo  %ErrorTxt1%
+echo  %ErrorTxt1% %aria2%%ErrorTxt11%
 echo.
 echo.
 echo.
@@ -814,8 +807,16 @@ echo.
 echo.
 echo  %ErrorTxt2%
 echo.
-echo  %FileExample%files
+echo  %FileExample%
 start https://aria2.github.io/
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 )
 
 :download_error
@@ -827,6 +828,15 @@ echo.
 echo  %ErrorTxt3%
 echo.
 echo  %ErrorTxt4%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 echo.
 echo.
 echo.
@@ -848,6 +858,15 @@ echo  %ErrorTxt7%
 echo.
 echo.
 echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 )
 
 :no_file_error
@@ -864,6 +883,15 @@ echo.
 echo.
 echo.
 echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 )
 
 :dlang
@@ -873,4 +901,7 @@ exit /b
 
 :langver
 if /i %LVer%==1 call files\lang.cmd -LVer && exit /b
+exit /b
+
+:EOF
 exit /b
