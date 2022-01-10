@@ -9,15 +9,15 @@ pause>nul
 exit /b
 
 :langver
-set "LVer1=2.6"
-set "LVer2=Build 446"
+set "LVer1=2.7"
+set "LVer2=Build 462"
 exit /b
 
 :english
 set "langconverter=EN-US"
 set "langchoose=Select Wizard Language"
 set "langwelcome=Welcome, Select your language"
-set "lang=English"
+set "lang1=English"
 set "lang2=Chinese Simplified"
 set "dlangtxt=Select your language and Press Enter to Continue: "
 set "LangVer2= ^,"
