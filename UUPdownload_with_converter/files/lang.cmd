@@ -9,8 +9,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer1=2.7"
-set "LVer2=Build 462"
+set "LVer1=2.8"
+set "LVer2=Build 475"
 exit /b
 
 :english
@@ -168,7 +168,7 @@ set "FillID=Fill in the Update ID: "
 
 set "TeamTitle=               Team Edition, Version 2004 and above - Update ID^(s^) Selection"
 set "TeamDes=This page can select UUP files of Team. Team not a General Edition, You don't need fill an Update &echo ID, just select a Build from the menu to start downloading. Some Builds on this page may be &echo deleted or added in future Updates at anytime."
-set "TeamDevDes=The following Builds are Team, Version Dev, All Builds Branch are both vb_release_svc_team_flight. &echo Some Builds may not provide Chinese versions, Please see Readme:"
+set "TeamDevDes=The following Builds are Team, All Builds Branch are both vb_release_svc_team_flight. Some Builds &echo may not provide Chinese editions, Please see Readme:"
 set "TeamBranch=and related branches"
 set "TeamSVC=The following Update ID(s) are standby update ID(s) of Some Builds:"
 
@@ -225,7 +225,7 @@ set "EditionApplicableDesB=版本，仅用于下载，不可创建 ISO 文件。"
 set "EditionApplicableDesC=版本，在下载后，将会自动创建 ISO 文件。"
 
 set "WelcomeTitle=                     欢迎下载 UUP 文件，请选择 UUP 下载网络预先设置"
-set "WelDes=此页设置用于控制是否启用吊销服务器检测。选择默认设置将会启用吊销服务器检测；选择备用设置将会 & echo 禁用吊销服务器检测。如果你在下载 UUP 文件时遇到吊销服务器检测问题，则可使用选项 B，你 & echo 也可以将选项 B 作为保险选项使用。"
+set "WelDes=此页设置用于控制是否启用吊销服务器检测。选择默认设置将会启用吊销服务器检测；选择备用设置将会 & echo 禁用吊销服务器检测。如果你在下载 UUP 文件时遇到吊销服务器检测问题，则可使用选项 B，你也可以 & echo 将选项 B 作为保险选项使用。"
 set "Def=默认设置"
 set "Alter=备用设置"
 set "WizInfo=关于此向导工具："
@@ -345,7 +345,7 @@ set "FillID=请填写更新 ID："
 
 set "TeamTitle=                             协同版，版本 2004 及以上——更新 ID 选择"
 set "TeamDes=此页选择协同版的 UUP 文件下载。协同版非常规版本，你不需要填写更新 ID，仅需从菜单中选择版本即可 &echo 开始下载。此页中的部分版本随时都有可能在后续更新中删除或新增。"
-set "TeamDevDes=以下是协同版，版本 Dev，编译分支均为 vb_release_svc_team_flight。某些版本可能未提供中文版本， &echo 请参阅自述文件："
+set "TeamDevDes=以下是协同版，编译分支均为 vb_release_svc_team_flight。某些版本可能未提供中文版本，请参阅自述 &echo 文件："
 set "TeamBranch=和相关分支"
 set "TeamSVC=以下为部分版本的备用更新 ID："
 
