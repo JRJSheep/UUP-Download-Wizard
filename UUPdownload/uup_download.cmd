@@ -19,9 +19,9 @@ set "all_proxy="
 color f0
 
 :: 版本指示内容
-set "Ver=2.7"
+set "Ver=2.8"
 set "Ver1=v%Ver%"
-set "udBuild=464.1"
+set "udBuild=480.1"
 
 :: 语言选择
 call files\lang.cmd -en
@@ -36,6 +36,8 @@ echo.
 echo     2 - %lang2%
 echo.
 echo %WizVer% %Ver% ^(%Build% %udBuild%^)
+echo ^(c^) 2016-2022 %CopyRight%
+echo %VerDes%
 echo %line2%
 set /p dlang=%dlangtxt%
 if %dlang% equ 1 (set dlang=1 & call :dlang)
@@ -236,24 +238,24 @@ echo %LangServerDes%
 echo.
 echo %ListLang%
 echo %line2%
-echo %LangServerMenu01%
-echo %LangServerMenu02%
-echo %LangServerMenu03%
-echo %LangServerMenu04%
-echo %LangServerMenu05%
-echo %LangServerMenu06%
-echo %LangServerMenu07%
-echo %LangServerMenu08%
-echo %LangServerMenu09%
-echo %LangServerMenu10%
-echo %LangServerMenu11%
-echo %LangServerMenu12%
-echo %LangServerMenu13%
-echo %LangServerMenu14%
-echo %LangServerMenu15%
-echo %LangServerMenu16%
-echo %LangServerMenu17%
-echo %LangServerMenu18%
+echo   %LangServerMenu01%
+echo   %LangServerMenu02%
+echo   %LangServerMenu03%
+echo   %LangServerMenu04%
+echo   %LangServerMenu05%
+echo   %LangServerMenu06%
+echo   %LangServerMenu07%
+echo   %LangServerMenu08%
+echo   %LangServerMenu09%
+echo   %LangServerMenu10%
+echo   %LangServerMenu11%
+echo   %LangServerMenu12%
+echo   %LangServerMenu13%
+echo   %LangServerMenu14%
+echo   %LangServerMenu15%
+echo   %LangServerMenu16%
+echo   %LangServerMenu17%
+echo   %LangServerMenu18%
 echo.
 echo.
 echo %line%
@@ -797,11 +799,11 @@ echo.
 echo.
 echo  %ErrorTxt5%%DETECTED_ERROR%
 echo.
+echo.
 echo  %ErrorTxt6%
 echo.
+echo.
 echo  %ErrorTxt7%
-echo.
-echo.
 echo.
 echo.
 echo.
