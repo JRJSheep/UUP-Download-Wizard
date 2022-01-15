@@ -32,9 +32,9 @@ set "cert=--check-certificate=false "
 set "bckps="
 
 :: 版本指示内容
-set "Ver=2.7"
+set "Ver=2.8"
 set "Ver1=v%Ver%"
-set "udBuild=464.1"
+set "udBuild=480.1"
 
 
 if NOT "%cd%"=="%cd: =%" (
@@ -79,6 +79,7 @@ echo.
 echo     2 - %lang2%
 echo.
 echo %WizVer% %Ver% ^(%Build% %udBuild%^)
+echo ^(c^) 2016-2022 %CopyRight%
 echo %line2%
 set /p dlang=%dlangtxt%
 if %dlang% equ 1 (set dlang=1 & call :dlang)
@@ -852,11 +853,11 @@ echo.
 echo.
 echo  %ErrorTxt5%%DETECTED_ERROR%
 echo.
+echo.
 echo  %ErrorTxt6%
 echo.
+echo.
 echo  %ErrorTxt7%
-echo.
-echo.
 echo.
 echo.
 echo.
