@@ -9,8 +9,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer1=2.8"
-set "LVer2=Build 475"
+set "LVer1=2.9"
+set "LVer2=Build 500"
 exit /b
 
 :english
@@ -34,7 +34,7 @@ set "SelectSKU=Select the SKU Edition"
 set "SelectSKUGroup=Select the SKU Editions Group"
 set "UnsupportedSKU=Unsupported SKU Edition"
 set "UnsupportedLang=Unsupported Language"
-set "WriteBuildID=Fill in the update ID of the downloaded version"
+set "FillBuildID=Fill in the update ID of the downloaded version"
 set "SelectTeamID=Choose the Team Edition update ID"
 set "SearchUpdScript=Retrieving updated script"
 set "DLUUPFiles=Download the UUP files"
@@ -60,7 +60,7 @@ set "CopyRight=JRJSheep Script Localization. All Rights Reserved."
 set "VerDes=The development of this tool is inseparable from the support of uupdump ^(whatever127^) and aboddi1406 scripts."
 
 set "TxtDes1=Enter your option number and press "Enter": "
-set "StepDescription=                             B - Back to Last Page ^| H - Back to Homepage"
+set "StepDescription=                             B - Back to Last Page ^| C - Back to Homepage"
 
 set "PlatTitle=                             Select the edition type you want to download"
 set "PlatDescription=This page requires you to select the type of edition you want to download. If you want to download an edition such&echo as Home, Professional, etc., please select "Client Editions"; if you want to download a server edition such as &echo Azure Stack HCI, please select "Server Editions"."
@@ -211,7 +211,7 @@ set "SelectSKU=选择 SKU 版本"
 set "SelectSKUGroup=选择 SKU 版本组合"
 set "UnsupportedSKU=不支持的 SKU 版本"
 set "UnsupportedLang=不支持的语言"
-set "WriteBuildID=填写下载版本的更新 ID"
+set "FillBuildID=填写下载版本的更新 ID"
 set "SelectTeamID=选择协同版更新 ID"
 set "SearchUpdScript=检索更新脚本"
 set "DLUUPFiles=下载 UUP 文件"
@@ -236,7 +236,7 @@ set "CopyRight=正义羊脚本汉化。保留所有权利。"
 set "VerDes=此工具的开发离不开 uupdump ^(whatever127^) 和 aboddi1406 脚本的支持。"
 
 set "TxtDes1=请输入你的选项代码并按“Enter”键："
-set "StepDescription=                           B - 返回到上一页 ^| H - 返回到首页"
+set "StepDescription=                           B - 返回到上一页 ^| C - 返回到首页"
 
 set "PlatTitle=                                    请选择你要下载的版本类型"
 set "PlatDescription=此页要求你选择你要下载版本的类型。如果你要下载的是如家庭版、专业版等的版本，请选择“客户端”；&echo 如果你要下载的是如 Azure Stack HCI 这样的服务器版本，请选择“服务器端”。"

@@ -19,9 +19,9 @@ set "all_proxy="
 color f0
 
 :: 版本指示内容
-set "Ver=2.8"
+set "Ver=2.9"
 set "Ver1=v%Ver%"
-set "udBuild=480.1"
+set "udBuild=500.1"
 
 :: 语言选择
 call files\lang.cmd -en
@@ -31,9 +31,13 @@ echo %line%
 echo %langwelcome%
 echo %line%
 echo.
+echo.
 echo     1 - %lang1%
 echo.
+echo.
 echo     2 - %lang2%
+echo.
+echo.
 echo.
 echo %WizVer% %Ver% ^(%Build% %udBuild%^)
 echo ^(c^) 2016-2022 %CopyRight%
@@ -104,8 +108,8 @@ echo %VerDes%
 echo.
 echo %line%
 set /p Network=%TxtDes1%
-if %Network% equ B (set "cert=--check-certificate=false "&goto :second)
-if %Network% equ A (set "cert= "&goto :second)
+if %Network% equ b (set "cert=--check-certificate=false "&goto :second)
+if %Network% equ a (set "cert= "&goto :second)
 
 :: 选择平台适用版本
 :second
@@ -141,9 +145,7 @@ echo.
 echo.
 echo %line%
 set /p termin=%TxtDes1%
-if %termin% equ B goto :langserver
 if %termin% equ b goto :langserver
-if %termin% equ A goto :clientlang
 if %termin% equ a goto :clientlang
 
 :: 选择客户端语言
@@ -314,7 +316,7 @@ echo.
 echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq C goto :unsupportclientedition
+if %SKU% geq d goto :unsupportclientedition
 if %SKU% equ 8 goto :chooseclienteditiongroup
 if %SKU% equ 7 (set SKU=professionaln&goto :setupdateid)
 if %SKU% equ 6 (set SKU=coren&goto :setupdateid)
@@ -324,10 +326,8 @@ if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
 if %SKU% equ 1 (set SKU=core&goto :setupdateid)
 if %SKU% lss 0 goto :unsupportedition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
-if %SKU% equ b goto :clientlang
-if %SKU% equ B goto :clientlang
+if %SKU% equ c (goto :first)
+if %SKU% equ b (goto :clientlang)
 
 :: 选择客户端版本组合
 :chooseclienteditiongroup
@@ -362,7 +362,7 @@ echo.
 echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq 8 goto :unsupportclientedition
+if %SKU% geq d goto :unsupportclientedition
 if %SKU% equ 7 (set "SKU=core;coren;professional;professionaln;ppipro"&goto :setupdateid)
 if %SKU% equ 6 (set "SKU=core;coren;professional;professionaln"&goto :setupdateid)
 if %SKU% equ 5 (set "SKU=core;professional;ppipro"&goto :setupdateid)
@@ -371,10 +371,8 @@ if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdatei
 if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportclientedition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
+if %SKU% equ c goto :first
 if %SKU% equ b goto :chooseclientedition
-if %SKU% equ B goto :chooseclientedition
 
 :: 选择服务器版本
 :chooseserveredition
@@ -410,7 +408,7 @@ echo.
 echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq C goto :unsupportserveredition
+if %SKU% geq d goto :unsupportserveredition
 if %SKU% equ 6 goto :chooseservereditiongroup
 if %SKU% equ 5 (set "SKU=serverdatacenter"&goto :setupdateid)
 if %SKU% equ 4 (set "SKU=serverstandard"&goto :setupdateid)
@@ -418,10 +416,8 @@ if %SKU% equ 3 (set "SKU=serverdatacentercore"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandardcore"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
+if %SKU% equ c goto :first
 if %SKU% equ b goto :langserver
-if %SKU% equ B goto :langserver
 
 :: 选择服务器版本组合
 :chooseservereditiongroup
@@ -456,17 +452,15 @@ echo.
 echo %StepDescription%
 echo %line%
 set /p SKU=%TxtDes1%
-if %SKU% geq C goto :unsupportserveredition
+if %SKU% geq d goto :unsupportserveredition
 if %SKU% equ 5 (set "SKU=serverstandardcore;serverstandard;serverdatacentercore;serverdatacenter"&goto :setupdateid)
 if %SKU% equ 4 (set "SKU=serverdatacentercore;serverdatacenter"&goto :setupdateid)
 if %SKU% equ 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
 if %SKU% equ 2 (set "SKU=serverstandard;serverdatacenter"&goto :setupdateid)
 if %SKU% equ 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupdateid)
 if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ H goto :first
+if %SKU% equ c goto :first
 if %SKU% equ b goto :chooseserveredition
-if %SKU% equ B goto :chooseserveredition
 
 :: 不支持客户端版本警告
 :unsupportclientedition
@@ -613,7 +607,7 @@ if %choosemenu% equ 1 (color f0 & goto :langserver)
 :: 填写你的更新 ID
 :setupdateid
 cls
-title %title% %Ver1% - %Purpose% - %WriteBuildID%
+title %title% %Ver1% - %Purpose% - %FillBuildID%
 
 echo %line%
 echo %FillIDTitle%
@@ -645,19 +639,19 @@ echo  03 - 19042.572 ^(20H2_release %TeamBranch%^)
 echo.
 echo %TeamDevDes%
 echo.
-echo  04 - 19100.1008  05 - 19100.1009  06 - 19100.1019  07 - 19100.1021  08 - 19100.1023
+echo  04 - 19100.1008 ^| 05 - 19100.1009 ^| 06 - 19100.1019 ^| 07 - 19100.1021 ^| 08 - 19100.1023
 echo.
-echo  09 - 19100.1025  10 - 19100.1026  11 - 19100.1031  12 - 19100.1035  13 - 19100.1039
+echo  09 - 19100.1025 ^| 10 - 19100.1026 ^| 11 - 19100.1031 ^| 12 - 19100.1035 ^| 13 - 19100.1039
 echo.
-echo  14 - 19100.1041  15 - 19100.1045  16 - 19100.1047  17 - 19100.1050  18 - 19100.1051
+echo  14 - 19100.1041 ^| 15 - 19100.1045 ^| 16 - 19100.1047 ^| 17 - 19100.1050 ^| 18 - 19100.1051
 echo.
-echo  19 - 19100.1055  20 - 19100.1057  21 - 19100.1060  22 - 19100.1062  23 - 19100.1064
+echo  19 - 19100.1055 ^| 20 - 19100.1057 ^| 21 - 19100.1060 ^| 22 - 19100.1062 ^| 23 - 19100.1064
 echo.
-echo  24 - 19100.1065  25 - 19100.1066  26 - 19100.1067  27 - 19100.1070
+echo  24 - 19100.1065 ^| 25 - 19100.1066 ^| 26 - 19100.1067 ^| 27 - 19100.1070 ^|
 echo.
 echo %TeamSVC%
 echo.
-echo  E1 - 19100.1045
+echo  E1 - 19100.1045 ^|
 echo.
 echo %StepDescription%
 echo %line%
@@ -690,10 +684,8 @@ if %Team% equ 04 (set id=1503c1dc-82c3-4ebd-8299-afd449411884&goto :uupdownload)
 if %Team% equ 03 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
 if %Team% equ 02 (set id=8b2d3ddf-f617-4df4-a1da-15dcbf0e757c&goto :uupdownload)
 if %Team% equ 01 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
-if %Team% equ b goto :first
-if %Team% equ B goto :first
-if %Team% equ a goto :chooseedition
-if %Team% equ A goto :chooseedition
+if %Team% equ c goto :first
+if %Team% equ b goto :chooseedition
 
 :uupdownload
 cls
@@ -774,8 +766,8 @@ echo.
 echo.
 echo  %ErrorTxt3%
 echo.
-echo  %ErrorTxt4%
 echo.
+echo  %ErrorTxt4%
 echo.
 echo.
 echo.
