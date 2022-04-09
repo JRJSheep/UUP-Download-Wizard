@@ -32,9 +32,9 @@ set "cert=--check-certificate=false "
 set "bckps="
 
 :: 版本指示内容
-set "Ver=3.1"
+set "Ver=3.2"
 set "Ver1=v%Ver%"
-set "udBuild=585.1"
+set "udBuild=600.1"
 
 :: 版本类型控制，不应修改其中的任何内容
 set "PurposeA=%PurposeA%"
@@ -137,6 +137,7 @@ title %title% %Ver1% - %Purpose%
 
 :: 网络预先设置
 :first
+if exist \aria2_download.log del /s /q \aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
 cls
 echo %line%
@@ -146,28 +147,29 @@ echo %WelDes%
 echo.
 echo.
 echo.
-echo     A - %Def%
+echo.    A - %Def%
 echo.
 echo.
-echo     B - %Alter%
+echo.    B - %Alter%
+echo.
+echo.
+echo.    C - %StartSite%
 echo.
 echo.
 echo.
 echo.
-start https://uupdump.net/known.php?lang=zh-cn
 echo.
+echo.%WizInfo%
+echo.%line2%
+echo.%WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
+echo.%LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
 echo.
+echo.^(c^) 2016-2022 %CopyRight%
+echo.%VerDes%
 echo.
-echo %WizInfo%
-echo %line2%
-echo %WizVer% %Ver% ^(%Build% %udBuild%^) %EditionApplicableDesA%%PurposeB% %EditionApplicableDesC%
-echo %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
-echo.
-echo ^(c^) 2016-2022 %CopyRight%
-echo %VerDes%
-echo.
-echo %line%
-choice /c AB /n /m "%TxtDes1%"
+echo.%line%
+choice /c ABC /n /m "%TxtDes1%"
+if errorlevel 3 (start https://uupdump.net/known.php?lang=zh-cn&goto :first)
 if errorlevel 2 (set "cert=--check-certificate=false "&goto :second)
 if errorlevel 1 (set "cert= "&goto :second)
 
@@ -899,7 +901,7 @@ echo.
 echo.
 echo.
 echo.
-echo.%FileDirectory%
+echo.
 echo.
 echo.
 echo.
@@ -929,7 +931,7 @@ echo.
 echo.
 echo.
 echo.
-echo.%FileDirectory%
+echo.
 echo.
 echo.
 )
@@ -954,7 +956,7 @@ echo.
 echo.
 echo.
 echo.
-echo.%FileDirectory%
+echo.
 echo.
 echo.
 )
