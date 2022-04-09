@@ -10,8 +10,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer=3.1"
-set "LVerMax=Build 583"
+set "LVer=3.2"
+set "LVerMax=Build 600"
 exit /b
 
 :english
@@ -54,6 +54,8 @@ set "WelcomeTitle=               Welcome to download UUP files, please choose ne
 set "WelDes=The settings on this page are used to control whether to enable revocation server detection. Selecting Default & echo Setting will enable revocation server detection; Select Alternate Setting will disable revocation server detection."
 set "Def=Default Setting"
 set "Alter=Alternate Setting"
+set "StartSite=Open UUP dump Site"
+set "Prerel2=Prerelease. For testing purples only."
 set "WizInfo=About Wizard tool: "
 set "WizVer=Version"
 set "Build=Build"
@@ -246,6 +248,8 @@ set "WelcomeTitle=                         »¶Ó­ÏÂÔØ UUP ÎÄ¼ş£¬ÇëÑ¡Ôñ UUP ÏÂÔØÍøÂ
 set "WelDes=´ËÒ³ÉèÖÃÓÃÓÚ¿ØÖÆÊÇ·ñÆôÓÃµõÏú·şÎñÆ÷¼ì²â¡£Ñ¡ÔñÄ¬ÈÏÉèÖÃ½«»áÆôÓÃµõÏú·şÎñÆ÷¼ì²â£»Ñ¡Ôñ±¸ÓÃÉèÖÃ½«»á½û & echo ÓÃµõÏú·şÎñÆ÷¼ì²â¡£Èç¹ûÄãÔÚÏÂÔØ UUP ÎÄ¼şÊ±Óöµ½µõÏú·şÎñÆ÷¼ì²âÎÊÌâ£¬Ôò¿ÉÊ¹ÓÃÑ¡Ïî B£¬ÄãÒ²¿ÉÒÔ½«Ñ¡Ïî & echo B ×÷Îª±£ÏÕÑ¡ÏîÊ¹ÓÃ¡£"
 set "Def=Ä¬ÈÏÉèÖÃ"
 set "Alter=±¸ÓÃÉèÖÃ"
+set "StartSite=´ò¿ª UUP dump ÍøÕ¾"
+set "Prerel2=Ô¤·¢²¼°æ±¾¡£½öÓÃÓÚ²âÊÔ¡£"
 set "WizInfo=¹ØÓÚ´ËÏòµ¼¹¤¾ß£º"
 set "WizVer=°æ±¾"
 set "Build=ÄÚ²¿°æ±¾"
@@ -379,7 +383,7 @@ set "FinishTitle=                                           ÏÂ ÔØ Íê ³É"
 set "ErrorTitle=                                           ³ö ÏÖ ´í Îó"
 set "FLDLD=ÎÄ¼şÒÑÏÂÔØÍê³É¡£"
 set "AskConvert=ÊÇ·ñ¿ªÊ¼Ö´ĞĞ×ª»»£¿"
-set "ConvertTip=ÈçÒª¿ªÊ¼Ö´ĞĞ×ª»»£¬Çë°´ÈÎÒâ¼ü¼ÌĞøÖ´ĞĞ£»Èç²»ÏëÖ´ĞĞ×ª»»£¬Çë½«Ïòµ¼¹Ø±Õ¼´¿É¡£"
+set "ConvertTip=ÈçÒª¿ªÊ¼Ö´ĞĞ×ª»»£¬Çë°´ÈÎÒâ¼ü¼ÌĞøÖ´ĞĞ£»ÈçÄãĞèÒªÏÂÔØÓ¦ÓÃ£¬ÔİÊ±²»ÏëÖ´ĞĞ×ª»»£¬Çë½«Ïòµ¼¹Ø±Õ£¬È»ºóÔÙ´ÎÔËĞĞÏòµ¼¼´¿É¡£"
 set "FileDirectory=UUP ÎÄ¼şÒÑÏÂÔØµ½¡°"
 set "FileDirectory2=¡±ÎÄ¼ş¼ĞÄÚ¡£"
 set "FileTips=ËùÓĞÒÑÏÂÔØµÄ UUP ÎÄ¼ş¿ÉÍ¨¹ı uup-converter-wimlib »ò dism++ µÈ·½Ê½×ª»»Îª ISO ÎÄ¼ş¡£"
