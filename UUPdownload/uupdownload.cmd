@@ -21,9 +21,9 @@ color f0
 call files\lang.cmd -en
 
 :: 版本指示内容
-set "Ver=3.2"
+set "Ver=3.3"
 set "Ver1=v%Ver%"
-set "udBuild=600.1"
+set "udBuild=614.1"
 set LVer=1 && call :langver
 
 :: SKU 版本指示
@@ -99,6 +99,7 @@ title %title% %Ver1% - %Purpose%
 :first
 if exist \aria2_download.log del /s /q \aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
+
 cls
 echo.%line%
 echo.%WelcomeTitle%
@@ -115,7 +116,6 @@ echo.
 echo.
 echo.    C - %StartSite%
 echo.
-echo.%Prerel2%
 echo.
 echo.
 echo.
@@ -321,30 +321,30 @@ echo.   1 - %COBuild%
 echo.   2 - %ProBuild%
 echo.   3 - %TeamBuild%
 echo.   4 - %TeamDev%
+echo.   5 - %AppDown%
 echo.
 echo.%line2%
 echo.%CHBuild%
-echo.   5 - %CCSBuild%
+echo.   6 - %CCSBuild%
 echo.
 echo.%line2%
 echo.%EUBuild%
-echo.   6 - %CONBuild%
-echo.   7 - %ProNBuild%
+echo.   7 - %CONBuild%
+echo.   8 - %ProNBuild%
 echo.
 echo.%line3%
 echo.%COMBD%
-echo.   8 - %CombBuild%
-echo.   9 - %AppDown%
+echo.   9 - %CombBuild%
 echo.
 echo.%StepDescription2%
 echo.%line%
 set /p SKU=%TxtDes1%
 if %SKU% geq d goto :unsupportclientedition
-if %SKU% equ 9 (set SKU=app&goto :setupdateid)
-if %SKU% equ 8 goto :chooseclienteditiongroup
-if %SKU% equ 7 (set SKU=professionaln&goto :setupdateid)
-if %SKU% equ 6 (set SKU=coren&goto :setupdateid)
-if %SKU% equ 5 (set SKU=corecountryspecific&goto :setupdateid)
+if %SKU% equ 9 goto :chooseclienteditiongroup
+if %SKU% equ 8 (set SKU=professionaln&goto :setupdateid)
+if %SKU% equ 7 (set SKU=coren&goto :setupdateid)
+if %SKU% equ 6 (set SKU=corecountryspecific&goto :setupdateid)
+if %SKU% equ 5 (set SKU=app&goto :setupdateid)
 if %SKU% equ 4 (set SKU=ppipro&goto :setupdateid)
 if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
 if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
@@ -672,6 +672,7 @@ echo. 09 - 19100.1025 ^| 10 - 19100.1026 ^| 11 - 19100.1031 ^| 12 - 19100.1035 ^
 echo. 14 - 19100.1041 ^| 15 - 19100.1045 ^| 16 - 19100.1047 ^| 17 - 19100.1050 ^| 18 - 19100.1051
 echo. 19 - 19100.1055 ^| 20 - 19100.1057 ^| 21 - 19100.1060 ^| 22 - 19100.1062 ^| 23 - 19100.1064
 echo. 24 - 19100.1065 ^| 25 - 19100.1066 ^| 26 - 19100.1067 ^| 27 - 19100.1070 ^| 28 - 19100.1079
+echo. 29 - 19100.1085 ^|
 echo.
 echo.%line3%
 echo.
@@ -680,11 +681,11 @@ echo.
 echo. E1 - 19100.1045
 echo.
 echo.
-echo.
 echo.%StepDescription2%
 echo.%line%
 set /p Team=%TxtDes1%
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
+if %Team% equ 29 (set id=91f38675-4298-43d9-a258-3130369a6829&goto :uupdownload)
 if %Team% equ 28 (set id=59e58c68-0c40-4cee-880f-500bf04bbcfa&goto :uupdownload)
 if %Team% equ 27 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
 if %Team% equ 26 (set id=2bf7a0c9-a2b0-4333-a3e8-7eed56f0e897&goto :uupdownload)
@@ -726,7 +727,7 @@ if NOT EXIST %aria2% set error=1&goto :ERROR
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://proxied.uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
