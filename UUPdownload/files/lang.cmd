@@ -10,8 +10,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer=3.2"
-set "LVerMax=Build 600"
+set "LVer=3.3"
+set "LVerMax=Build 609"
 exit /b
 
 :english
@@ -383,7 +383,7 @@ set "FinishTitle=                                           下 载 完 成"
 set "ErrorTitle=                                           出 现 错 误"
 set "FLDLD=文件已下载完成。"
 set "AskConvert=是否开始执行转换？"
-set "ConvertTip=如要开始执行转换，请按任意键继续执行；如你需要下载应用，暂时不想执行转换，请将向导关闭，然后再次运行向导即可。"
+set "ConvertTip=如要开始执行转换，请按任意键继续执行；如不想执行转换，请将向导关闭即可。"
 set "FileDirectory=UUP 文件已下载到“"
 set "FileDirectory2=”文件夹内。"
 set "FileTips=所有已下载的 UUP 文件可通过 uup-converter-wimlib 或 dism++ 等方式转换为 ISO 文件。"
