@@ -32,9 +32,9 @@ set "cert=--check-certificate=false "
 set "bckps="
 
 :: 版本指示内容
-set "Ver=3.3"
+set "Ver=3.4"
 set "Ver1=v%Ver%"
-set "udBuild=614.1"
+set "udBuild=625.1"
 
 :: 版本类型控制，不应修改其中的任何内容
 set "PurposeA=%PurposeA%"
