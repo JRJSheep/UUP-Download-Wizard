@@ -21,9 +21,9 @@ color f0
 call files\lang.cmd -en
 
 :: 版本指示内容
-set "Ver=3.3"
+set "Ver=3.4"
 set "Ver1=v%Ver%"
-set "udBuild=614.1"
+set "udBuild=625.1"
 set LVer=1 && call :langver
 
 :: SKU 版本指示
@@ -97,10 +97,10 @@ title %title% %Ver1% - %Purpose%
 
 :: 网络预先设置
 :first
+cls
 if exist \aria2_download.log del /s /q \aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
 
-cls
 echo.%line%
 echo.%WelcomeTitle%
 echo.%line%
@@ -115,7 +115,7 @@ echo.    B - %Alter%
 echo.
 echo.
 echo.    C - %StartSite%
-echo.
+echo.%Prerel2%
 echo.
 echo.
 echo.
@@ -727,7 +727,7 @@ if NOT EXIST %aria2% set error=1&goto :ERROR
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://proxied.uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
@@ -795,6 +795,7 @@ if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 echo.
 echo.
+echo.
 echo.%line%
 pause
 exit /b
@@ -814,7 +815,6 @@ echo.%ErrorTxt2%
 echo.
 echo.%FileExample%
 start https://aria2.github.io/
-echo.
 echo.
 echo.
 echo.
@@ -846,7 +846,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 )
 
 :uup_error
@@ -862,7 +861,6 @@ echo.%ErrorTxt6%
 echo.
 echo.
 echo.%ErrorTxt7%
-echo.
 echo.
 echo.
 echo.
