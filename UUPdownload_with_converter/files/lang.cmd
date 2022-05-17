@@ -10,8 +10,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer=3.2"
-set "LVerMax=Build 600"
+set "LVer=3.4"
+set "LVerMax=Build 620"
 exit /b
 
 :english
@@ -194,7 +194,7 @@ set "FileDirectory=UUP Files have been downloaded to the ^""
 set "FileDirectory2=^" folder."
 set "FileTips=All downloaded UUP files can be converted into an ISO file by uup-converter-wimlib or dism++."
 set "ErrorTxt1=We could not find"
-set "ErrorTxt11= in the current directory. Therefore, the download cannot continue."
+set "ErrorTxt11= in the current directory, therefore, the download cannot continue."
 set "DLAria=You can download aria2 from ^(It will be start in your browser^): "
 set "ErrorTxt2=After downloading, Extract the files in the aria2 compressed package to the following path to download normally:"
 set "FileExample=Current folder：%~dp0"
@@ -383,12 +383,12 @@ set "FinishTitle=                                           下 载 完 成"
 set "ErrorTitle=                                           出 现 错 误"
 set "FLDLD=文件已下载完成。"
 set "AskConvert=是否开始执行转换？"
-set "ConvertTip=如要开始执行转换，请按任意键继续执行；如你需要下载应用，暂时不想执行转换，请将向导关闭，然后再次运行向导即可。"
+set "ConvertTip=如要开始执行转换，请按任意键继续执行；如不想执行转换，请将向导关闭。"
 set "FileDirectory=UUP 文件已下载到“"
 set "FileDirectory2=”文件夹内。"
 set "FileTips=所有已下载的 UUP 文件可通过 uup-converter-wimlib 或 dism++ 等方式转换为 ISO 文件。"
 set "ErrorTxt1=我们无法在当前的目录中找到"
-set "ErrorTxt11=。因此下载无法继续。"
+set "ErrorTxt11=，因此下载无法继续。"
 set "DLAria=你可以在此处下载 aria2（将自动在浏览器中打开）："
 set "ErrorTxt2=下载后，将 aria2 压缩包中的文件解压到以下路径，即可正常进行下载："
 set "FileExample=当前文件夹：%~dp0"
