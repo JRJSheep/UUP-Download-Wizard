@@ -115,7 +115,7 @@ echo.    B - %Alter%
 echo.
 echo.
 echo.    C - %StartSite%
-echo.%Prerel2%
+echo.
 echo.
 echo.
 echo.
@@ -727,7 +727,7 @@ if NOT EXIST %aria2% set error=1&goto :ERROR
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://proxied.uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
