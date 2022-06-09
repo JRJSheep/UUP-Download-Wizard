@@ -18,12 +18,13 @@ set "all_proxy="
 
 color f0
 
+
 call files\lang.cmd -en
 
 :: 版本指示内容
-set "Ver=3.4"
-set "Ver1=v%Ver%"
-set "udBuild=625.1"
+set "Ver=4.0"
+set "DispVersion=v%Ver%"
+set "udBuild=650.8"
 set LVer=1 && call :langver
 
 :: SKU 版本指示
@@ -57,8 +58,8 @@ echo.
 echo.
 echo.%WizInfo%
 echo.%line2%
-echo.%WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
-echo.%LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%WizVer% %Ver% ^(%Build% %udBuild%^)  %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
@@ -93,7 +94,7 @@ set "SearchUpdScript=%SearchUpdScript%"
 set "DLUUPFiles=%DLUUPFiles%"
 set "FoundError=%FoundError%"
 
-title %title% %Ver1% - %Purpose%
+title %title1%%title2% %DispVersion% - %Purpose%
 
 :: 网络预先设置
 :first
@@ -101,6 +102,7 @@ cls
 if exist \aria2_download.log del /s /q \aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
 
+cls
 echo.%line%
 echo.%WelcomeTitle%
 echo.%line%
@@ -110,19 +112,19 @@ echo.
 echo.
 echo.    A - %Def%
 echo.
-echo.
 echo.    B - %Alter%
-echo.
 echo.
 echo.    C - %StartSite%
 echo.
 echo.
 echo.
 echo.
+echo.
+echo.
 echo.%WizInfo%
 echo.%line2%
-echo.%WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
-echo.%LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%WizVer% %Ver% ^(%Build% %udBuild%^)  %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
@@ -136,7 +138,7 @@ if errorlevel 1 (set "cert= "&goto :second)
 :: 选择平台适用版本
 :second
 cls
-title %title% %Ver1% - %Purpose% - %SelectPlat%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectPlat%
 
 echo.%line%
 echo.%PlatTitle%
@@ -175,7 +177,7 @@ if errorlevel 1 goto :clientlang
 :: 选择客户端语言
 :clientlang
 cls
-title %title% %Ver1% - %Purpose% - %SelectClientLang%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectClientLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -252,7 +254,7 @@ if %SKU% equ b goto :second
 :: 选择服务器语言
 :langserver
 cls
-title %title% %Ver1% - %Purpose% - %SelectServerLang%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectServerLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -280,7 +282,7 @@ echo.         16 - %LangMenu36%
 echo.         17 - %LangMenu37%
 echo.         18 - %LangMenu38%
 echo.
-echo.%StepDescription2%
+echo.
 echo.%line%
 set /p Lang=%TxtDes1%
 if %Lang% geq 19 goto :unsupportserverlang
@@ -303,13 +305,11 @@ if %Lang% equ 03 (set Lang=de-de&goto :chooseserveredition)
 if %Lang% equ 02 (set Lang=ko-kr&goto :chooseserveredition)
 if %Lang% equ 01 (set Lang=pl-pl&goto :chooseserveredition)
 if %Lang% lss 01 goto :unsupportlang
-if %SKU% equ h goto :first
-if %SKU% equ b goto :second
 
 :: 选择客户端版本
 :chooseclientedition
 cls
-title %title% %Ver1% - %Purpose% - %SelectSKU1%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -320,43 +320,41 @@ echo.%AnyBuild%
 echo.   1 - %COBuild%
 echo.   2 - %ProBuild%
 echo.   3 - %TeamBuild%
-echo.   4 - %TeamDev%
-echo.   5 - %AppDown%
 echo.
 echo.%line2%
 echo.%CHBuild%
-echo.   6 - %CCSBuild%
+echo.   4 - %CCSBuild%
 echo.
 echo.%line2%
 echo.%EUBuild%
-echo.   7 - %CONBuild%
-echo.   8 - %ProNBuild%
+echo.   5 - %CONBuild%
+echo.   6 - %ProNBuild%
 echo.
 echo.%line3%
 echo.%COMBD%
-echo.   9 - %CombBuild%
+echo.   7 - %CombBuild%
+echo.   8 - %AppDown%
+echo.
 echo.
 echo.%StepDescription2%
 echo.%line%
-set /p SKU=%TxtDes1%
-if %SKU% geq d goto :unsupportclientedition
-if %SKU% equ 9 goto :chooseclienteditiongroup
-if %SKU% equ 8 (set SKU=professionaln&goto :setupdateid)
-if %SKU% equ 7 (set SKU=coren&goto :setupdateid)
-if %SKU% equ 6 (set SKU=corecountryspecific&goto :setupdateid)
-if %SKU% equ 5 (set SKU=app&goto :setupdateid)
-if %SKU% equ 4 (set SKU=ppipro&goto :setupdateid)
-if %SKU% equ 3 (set SKU=ppipro&goto :chooseupdateidteam)
-if %SKU% equ 2 (set SKU=professional&goto :setupdateid)
-if %SKU% equ 1 (set SKU=core&goto :setupdateid)
-if %SKU% lss 0 goto :unsupportedition
-if %SKU% equ h goto :first
-if %SKU% equ b goto :clientlang
+choice /c 12345678BC /n /m "%TxtDes1%"
+if errorlevel 10 goto :first
+if errorlevel 9 goto :clientlang
+if errorlevel 8 (set SKU=app&goto :setupdateid)
+if errorlevel 7 goto :chooseclienteditiongroup
+if errorlevel 6 (set SKU=professionaln&goto :setupdateid)
+if errorlevel 5 (set SKU=coren&goto :setupdateid)
+if errorlevel 4 (set SKU=corecountryspecific&goto :setupdateid)
+if errorlevel 3 (set SKU=ppipro&goto :chooseupdateidteam)
+if errorlevel 2 (set SKU=professional&goto :setupdateid)
+if errorlevel 1 (set SKU=core&goto :setupdateid)
+
 
 :: 选择客户端版本组合
 :chooseclienteditiongroup
 cls
-title %title% %Ver1% - %Purpose% - %SelectSKUGroup%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -383,25 +381,24 @@ echo.   6 - %CCNPPN%
 echo.   7 - %CCNPPNT%
 echo.
 echo.
-echo.%StepDescription2%
+echo.%StepDescription%
 echo.%line%
-set /p SKU=%TxtDes1%
-if %SKU% geq d goto :unsupportclientedition
-if %SKU% equ 7 (set "SKU=core;coren;professional;professionaln;ppipro"&goto :setupdateid)
-if %SKU% equ 6 (set "SKU=core;coren;professional;professionaln"&goto :setupdateid)
-if %SKU% equ 5 (set "SKU=core;professional;ppipro"&goto :setupdateid)
-if %SKU% equ 4 (set "SKU=core;professional"&goto :setupdateid)
-if %SKU% equ 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdateid)
-if %SKU% equ 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
-if %SKU% equ 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
-if %SKU% lss 1 goto :unsupportclientedition
-if %SKU% equ h goto :first
-if %SKU% equ b goto :chooseclientedition
+choice /c 1234567BC /n /m "%TxtDes1%"
+if errorlevel 9 goto :first
+if errorlevel 8 goto :chooseclientedition
+if errorlevel 7 (set "SKU=core;coren;professional;professionaln;ppipro"&goto :setupdateid)
+if errorlevel 6 (set "SKU=core;coren;professional;professionaln"&goto :setupdateid)
+if errorlevel 5 (set "SKU=core;professional;ppipro"&goto :setupdateid)
+if errorlevel 4 (set "SKU=core;professional"&goto :setupdateid)
+if errorlevel 3 (set "SKU=core;corecountryspecific;professional"&goto :setupdateid)
+if errorlevel 2 (set "SKU=corecountryspecific;professional"&goto :setupdateid)
+if errorlevel 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
+
 
 :: 选择服务器版本
 :chooseserveredition
 cls
-title %title% %Ver1% - %Purpose% - %SelectSKU1%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -429,24 +426,22 @@ echo.
 echo.
 echo.
 echo.
-echo.%StepDescription2%
+echo.%StepDescription%
 echo.%line%
-set /p SKU=%TxtDes1%
-if %SKU% geq d goto :unsupportserveredition
-if %SKU% equ 6 goto :chooseservereditiongroup
-if %SKU% equ 5 (set "SKU=serverdatacenter"&goto :setupdateid)
-if %SKU% equ 4 (set "SKU=serverstandard"&goto :setupdateid)
-if %SKU% equ 3 (set "SKU=serverdatacentercore"&goto :setupdateid)
-if %SKU% equ 2 (set "SKU=serverstandardcore"&goto :setupdateid)
-if %SKU% equ 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
-if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ b goto :langserver
+choice /c 123456AB /n /m "%TxtDes1%"
+if errorlevel 8 goto :first
+if errorlevel 7 goto :chooseserveredition
+if errorlevel 6 goto :chooseservereditiongroup
+if errorlevel 5 (set "SKU=serverdatacenter"&goto :setupdateid)
+if errorlevel 4 (set "SKU=serverstandard"&goto :setupdateid)
+if errorlevel 3 (set "SKU=serverdatacentercore"&goto :setupdateid)
+if errorlevel 2 (set "SKU=serverstandardcore"&goto :setupdateid)
+if errorlevel 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 
 :: 选择服务器版本组合
 :chooseservereditiongroup
 cls
-title %title% %Ver1% - %Purpose% - %SelectSKUGroup%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -473,97 +468,22 @@ echo.%editiongroup7%
 echo.
 echo.   5 - %ServerSCSDCD%
 echo.
-echo.%StepDescription2%
+echo.%StepDescription%
 echo.%line%
-set /p SKU=%TxtDes1%
-if %SKU% geq d goto :unsupportserveredition
-if %SKU% equ 5 (set "SKU=serverstandardcore;serverstandard;serverdatacentercore;serverdatacenter"&goto :setupdateid)
-if %SKU% equ 4 (set "SKU=serverdatacentercore;serverdatacenter"&goto :setupdateid)
-if %SKU% equ 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
-if %SKU% equ 2 (set "SKU=serverstandard;serverdatacenter"&goto :setupdateid)
-if %SKU% equ 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupdateid)
-if %SKU% lss 1 goto :unsupportserveredition
-if %SKU% equ h goto :first
-if %SKU% equ b goto :chooseserveredition
+choice /c 12345AB /n /m "%TxtDes1%"
+if errorlevel 7 goto :first
+if errorlevel 6 goto :chooseserveredition
+if errorlevel 5 (set "SKU=serverstandardcore;serverstandard;serverdatacentercore;serverdatacenter"&goto :setupdateid)
+if errorlevel 4 (set "SKU=serverdatacentercore;serverdatacenter"&goto :setupdateid)
+if errorlevel 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
+if errorlevel 2 (set "SKU=serverstandard;serverdatacenter"&goto :setupdateid)
+if errorlevel 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupdateid)
 
-:: 不支持客户端版本警告
-:unsupportclientedition
-cls
-title %title% %Ver1% - %Purpose% - %UnsupportedSKU%
-
-echo.%line%
-echo.%WarTitle%
-echo.%line%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo. %Wartxt%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.%line2%
-echo.
-echo.   1 - %SingleEdt%
-echo.   2 - %CombEdt%
-echo.   E - %Exit%
-echo.
-echo.
-echo.%line%
-choice /c 12E /n /m "%ContExit%"
-if errorlevel 3 goto :EOF
-if errorlevel 2 color f0 & goto :chooseclienteditiongroup
-if errorlevel 1 color f0 & goto :chooseclientedition
-
-:: 不支持服务器版本警告
-:unsupportserveredition
-cls
-title %title% %Ver1% - %Purpose% - %UnsupportedSKU%
-
-echo.%line%
-echo.%WarTitle%
-echo.%line%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo. %Wartxt%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.%line2%
-echo.
-echo.   1 - %SingleEdt%
-echo.   2 - %CombEdt%
-echo.   E - %Exit%
-echo.
-echo.
-echo.%line%
-choice /c 12E /n /m "%ContExit%"
-if errorlevel 3 goto :EOF
-if errorlevel 2 color f0 & goto :chooseclienteditiongroup
-if errorlevel 1 color f0 & goto :chooseclientedition
 
 :: 不支持客户端语言版本警告
 :unsupportclientlang
 cls
-title %title% %Ver1% - %Purpose% - %UnsupportedLang%
+title %title1%%title2% %DispVersion% - %Purpose% - %UnsupportedLang%
 color f4
 echo.%line%
 echo.%WarTitle%
@@ -599,7 +519,7 @@ if errorlevel 1 goto :clientlang
 :: 不支持服务器语言版本警告
 :unsupportserverlang
 cls
-title %title% %Ver1% - %Purpose% - %UnsupportedLang%
+title %title1%%title2% %DispVersion% - %Purpose% - %UnsupportedLang%
 color f4
 echo.%line%
 echo.%WarTitle%
@@ -635,7 +555,7 @@ if errorlevel 1 (color f0 & goto :langserver)
 :: 填写你的更新 ID
 :setupdateid
 cls
-title %title% %Ver1% - %Purpose% - %WriteBuildID%
+title %title1%%title2% %DispVersion% - %Purpose% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -654,37 +574,39 @@ set "id=%id%"&goto :uupdownload
 :: 选择协同版更新 ID
 :chooseupdateidteam
 cls
-title %title% %Ver1% - %Purpose% - %SelectTeamID%
+title %title1%%title2% %DispVersion% - %Purpose% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle%
 echo.%line%
 echo.%TeamDes%
-echo.
 echo. 01 - 19042.538 ^(20H2_release %TeamBranch%^)
 echo. 02 - 19042.545 ^(20H2_release %TeamBranch%^)
 echo. 03 - 19042.572 ^(20H2_release %TeamBranch%^)
 echo.
 echo.%TeamDevDes%
-echo.
 echo. 04 - 19100.1008 ^| 05 - 19100.1009 ^| 06 - 19100.1019 ^| 07 - 19100.1021 ^| 08 - 19100.1023
 echo. 09 - 19100.1025 ^| 10 - 19100.1026 ^| 11 - 19100.1031 ^| 12 - 19100.1035 ^| 13 - 19100.1039
 echo. 14 - 19100.1041 ^| 15 - 19100.1045 ^| 16 - 19100.1047 ^| 17 - 19100.1050 ^| 18 - 19100.1051
 echo. 19 - 19100.1055 ^| 20 - 19100.1057 ^| 21 - 19100.1060 ^| 22 - 19100.1062 ^| 23 - 19100.1064
 echo. 24 - 19100.1065 ^| 25 - 19100.1066 ^| 26 - 19100.1067 ^| 27 - 19100.1070 ^| 28 - 19100.1079
-echo. 29 - 19100.1085 ^|
-echo.
+echo. 29 - 19100.1085 ^| 30 - 19100.1086 ^|
 echo.%line3%
-echo.
 echo.%TeamSVC%
 echo.
 echo. E1 - 19100.1045
 echo.
+echo.%line3%
+echo.%TeamDevOth%
+echo.
+echo. E2 - %TeamDev%
 echo.
 echo.%StepDescription2%
 echo.%line%
 set /p Team=%TxtDes1%
+if %Team% equ E2 goto :setupdateid
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
+if %Team% equ 30 (set id=e28e1d05-667f-434c-9702-89c9e34ed38b&goto :uupdownload)
 if %Team% equ 29 (set id=91f38675-4298-43d9-a258-3130369a6829&goto :uupdownload)
 if %Team% equ 28 (set id=59e58c68-0c40-4cee-880f-500bf04bbcfa&goto :uupdownload)
 if %Team% equ 27 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
@@ -719,7 +641,7 @@ if %Team% equ b goto :chooseedition
 
 :uupdownload
 cls
-title %title% %Ver1% - %Purpose% - %SearchUpdScript%
+title %title1%%title2% %DispVersion% - %Purpose% - %SearchUpdScript%
 
 cd /d "%~dp0"
 if NOT EXIST %aria2% set error=1&goto :ERROR
@@ -734,26 +656,41 @@ for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %title% %Ver1% - %Purpose% - %DLUUPFiles%
+title %title1%%title2% %DispVersion% - %Purpose% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%
 echo.%line%
 "%aria2%" --no-conf --log-level=info --log="aria2_download.log" -x16 -s16 -j5 -c -R -d"%destDir%" -i"%aria2Script%"
-if %ERRORLEVEL% EQU 0 call :FINISH&exit /b 1
+if %ERRORLEVEL% EQU 0 set error=0&call :ERROR&exit /b 1
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR&exit /b 1
 
 pause
 
 
-:FINISH
+:ERROR
 cls
-title %title% %Ver1% - %Purpose% - %DLFinish%
+if %error% equ 0 title %title1%%title2% %DispVersion% - %Purpose% - %DLFinish%
+if %error% gtr 0 title %title1%%title2% %DispVersion% - %Purpose% - %FoundError%
+color f4
 echo.%line%
-echo.%FinishTitle%
+if %error% equ 0 (color f0&echo %FinishTitle%)
+if %error% gtr 0 (color f4&echo.%ErrorTitle%)
 echo.%line%
 echo.
 echo.
+if %error% equ 0 call :finish
+if %error% equ 1 call :aria_error
+if %error% equ 2 call :download_error
+if %error% equ 3 call :uup_error
+echo.
+echo.
+echo.%line%
+pause
+exit /b
+
+:finish
+if %error% equ 0 (
 echo.
 echo.
 echo.
@@ -775,30 +712,7 @@ echo.
 echo.
 echo.
 echo.
-echo.
-echo.
-echo.%line%
-pause
-exit /b
-
-:ERROR
-cls
-title %title% %Ver1% - %Purpose% - %FoundError%
-color f4
-echo.%line%
-echo.%ErrorTitle%
-echo.%line%
-echo.
-echo.
-if %error% equ 1 call :aria_error
-if %error% equ 2 call :download_error
-if %error% equ 3 call :uup_error
-echo.
-echo.
-echo.
-echo.%line%
-pause
-exit /b
+)
 
 :aria_error
 if %error% equ 1 (
@@ -815,6 +729,7 @@ echo.%ErrorTxt2%
 echo.
 echo.%FileExample%
 start https://aria2.github.io/
+echo.
 echo.
 echo.
 echo.
@@ -846,6 +761,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 
 :uup_error
@@ -861,6 +777,7 @@ echo.%ErrorTxt6%
 echo.
 echo.
 echo.%ErrorTxt7%
+echo.
 echo.
 echo.
 echo.
