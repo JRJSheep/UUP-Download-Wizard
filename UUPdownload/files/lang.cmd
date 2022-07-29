@@ -10,13 +10,18 @@ echo.
 call :langver
 echo 语言文件最高适配版本：%LVer%，%LVerMax%.%LMVerMax%
 echo Max Build for Wizard Language file: %LVer%，%LVerMax%.%LMVerMax%
+echo.
+echo 语言文件最低适配版本：%LVer%，%LVerMin%.%LMVerMin%
+echo Minimum Build for Wizard Language file: %LVer%，%LVerMin%.%LMVerMin%
 pause>nul
 exit /b
 
 :langver
-set "LVer=4.0"
-set "LVerMax=Build 640"
-set "LMVerMax=1000"
+set "LVer=4.1"
+set "LVerMax=Build 700"
+set "LMVerMax=0.3"
+set "LVerMin=Build 661"
+set "LMVerMin=0"
 exit /b
 
 :english
@@ -78,7 +83,7 @@ set "StepDescription1=                                  C - Back to Last Page ^|
 set "StepDescription2=                                  B - Back to Last Page ^| C - Back to Homepage"
 
 set "PlatTitle=                             Select the edition type you want to download"
-set "PlatDescription=This page requires you to select the type of edition you want to download. If you want to download an edition such&echo as Home, Professional, etc., please select "Client Editions"; if you want to download a server edition such as &echo Azure Stack HCI, please select "Server Editions"."
+set "PlatDescription=This page requires you to select the type of edition you want to download. If you want to download an edition such&echo as Home, Professional, etc., please select "Client Editions"; if you want to download a 服务器版本 such as &echo Azure Stack HCI, please select "服务器版本s"."
 set "ClientTypeDescription=If the version you want to download is Home, Professional, etc., use the following option:"
 set "ClientType=Client Editions"
 set "ServerTypeDescription=If the version you want to download is Server Standard, etc., use the following option:"
@@ -259,7 +264,7 @@ set "PathSpace2=请将此目录移动到或重命名为不含空格的目录。"
 set "Admin=此脚本需要以管理器权限执行。"
 set "EditionApplicableDesA=此版本为"
 set "EditionApplicableDesB=版本，仅用于下载，不可创建 ISO 文件。"
-set "EditionApplicableDesC=版本，在下载后，将可创建 ISO 文件。"
+set "EditionApplicableDesC= 版本，在下载后，将可创建 ISO 文件。"
 
 set "WelcomeTitle=                         欢迎下载 UUP 文件，请选择 UUP 下载网络预先设置"
 set "WelDes=此页设置用于控制是否启用吊销服务器检测。选择默认设置将会启用吊销服务器检测；选择备用设置将会禁 & echo 用吊销服务器检测。如果你在下载 UUP 文件时遇到吊销服务器检测问题，则可使用选项 B，你也可以将选项 & echo B 作为保险选项使用。"
