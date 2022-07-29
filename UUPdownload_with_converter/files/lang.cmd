@@ -10,13 +10,18 @@ echo.
 call :langver
 echo 语言文件最高适配版本：%LVer%，%LVerMax%.%LMVerMax%
 echo Max Build for Wizard Language file: %LVer%，%LVerMax%.%LMVerMax%
+echo.
+echo 语言文件最低适配版本：%LVer%，%LVerMin%.%LMVerMin%
+echo Minimum Build for Wizard Language file: %LVer%，%LVerMin%.%LMVerMin%
 pause>nul
 exit /b
 
 :langver
-set "LVer=4.0"
-set "LVerMax=Build 640"
-set "LMVerMax=1000"
+set "LVer=4.1"
+set "LVerMax=Build 700"
+set "LMVerMax=0.1"
+set "LVerMin=Build 661"
+set "LMVerMin=0"
 exit /b
 
 :english
@@ -78,7 +83,7 @@ set "StepDescription1=                                  C - Back to Last Page ^|
 set "StepDescription2=                                  B - Back to Last Page ^| C - Back to Homepage"
 
 set "PlatTitle=                             Select the edition type you want to download"
-set "PlatDescription=This page requires you to select the type of edition you want to download. If you want to download an edition such&echo as Home, Professional, etc., please select "Client Editions"; if you want to download a server edition such as &echo Azure Stack HCI, please select "Server Editions"."
+set "PlatDescription=This page requires you to select the type of edition you want to download. If you want to download an edition such&echo as Home, Professional, etc., please select "Client Editions"; if you want to download a 服务器版本 such as &echo Azure Stack HCI, please select "服务器版本s"."
 set "ClientTypeDescription=If the version you want to download is Home, Professional, etc., use the following option:"
 set "ClientType=Client Editions"
 set "ServerTypeDescription=If the version you want to download is Server Standard, etc., use the following option:"
