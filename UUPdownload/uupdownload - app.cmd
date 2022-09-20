@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.1"
+set "Ver=4.2"
 set "DispVersion=v%Ver%"
-set "udBuild=700"
+set "udBuild=740"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ call files\lang.cmd -en
 
 color f0
 
-title %langchoose% %title3% - %PurposeA%
+title %langchoose% - %PurposeA%
 cls
 echo.%line%
 echo.%langwelcome%
@@ -62,7 +62,7 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%PurposeA%%EditionApplicableDesB%
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
@@ -481,8 +481,8 @@ pause
 ::-------------------------------------------------------------------------------------------
 :ERROR
 cls
-if %error% equ 0 title %title1%%title2% %DispVersion% - %Purpose% - %DLFinish%
-if %error% gtr 0 title %title1%%title2% %DispVersion% - %Purpose% - %FoundError%
+if %error% equ 0 title %title1%%title2% %Ver1% - %Purpose% - %DLFinish%
+if %error% gtr 0 title %title1%%title2% %Ver1% - %Purpose% - %FoundError%
 
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
@@ -496,9 +496,10 @@ if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 echo.
 echo.
+echo.
 echo.%line%
 pause
-goto :EOF
+exit
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -600,12 +601,12 @@ echo.
 echo.%ErrorTxt5%%DETECTED_ERROR%
 echo.
 echo.
-echo.%ErrorTxt6%
-echo.
+echo.%ErrorTxt61%
+echo.- %ErrorTxt62%
+echo.- %ErrorTxt63%
+echo.- %ErrorTxt64%
 echo.
 echo.%ErrorTxt7%
-echo.
-echo.
 echo.
 echo.
 echo.
@@ -628,9 +629,4 @@ exit /b
 :langver
 if /i %LVer%==1 call files\lang.cmd -LVer && exit /b
 exit /b
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:EOF
-exit
 ::-------------------------------------------------------------------------------------------

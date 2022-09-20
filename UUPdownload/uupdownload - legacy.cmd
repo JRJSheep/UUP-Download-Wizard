@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.1"
+set "Ver=4.2"
 set "DispVersion=v%Ver%"
-set "udBuild=700"
+set "udBuild=740"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ call files\lang.cmd -en
 
 color f0
 
-title %langchoose% %title2% - %PurposeA%
+title %langchoose% - %PurposeA%
 cls
 echo.%line%
 echo.%langwelcome%
@@ -62,7 +62,7 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%PurposeA%%EditionApplicableDesB%
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
@@ -272,7 +272,6 @@ if %Lang% equ 01 (set Lang=ar-sa&goto :chooseclientedition)
 if %Lang% lss 01 goto :unsupportlang
 if %SKU% equ h goto :first
 if %SKU% equ b goto :second
-::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 选择服务器语言
@@ -330,7 +329,6 @@ if %Lang% equ 03 (set Lang=de-de&goto :chooseserveredition)
 if %Lang% equ 02 (set Lang=ko-kr&goto :chooseserveredition)
 if %Lang% equ 01 (set Lang=pl-pl&goto :chooseserveredition)
 if %Lang% lss 01 goto :unsupportlang
-::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 选择客户端版本
@@ -627,15 +625,15 @@ echo.%TeamTitle%
 echo.%line%
 echo.%TeamDes%
 echo. 01 - 19042.538 ^(20H2_release %TeamBranch%^) ^| 02 - 19042.545 ^(20H2_release %TeamBranch%^)
-echo. 03 - 19042.572 ^(20H2_release %TeamBranch%^)
+echo. 03 - 19042.572 ^(20H2_release %TeamBranch%^) ^| 04 - 19045.1865 ^(22H2_release %TeamBranch%^)
 echo.
 echo.%TeamDevDes%
-echo. 04 - 19100.1008 ^| 05 - 19100.1009 ^| 06 - 19100.1019 ^| 07 - 19100.1021 ^| 08 - 19100.1023
-echo. 09 - 19100.1025 ^| 10 - 19100.1026 ^| 11 - 19100.1031 ^| 12 - 19100.1035 ^| 13 - 19100.1039
-echo. 14 - 19100.1041 ^| 15 - 19100.1045 ^| 16 - 19100.1047 ^| 17 - 19100.1050 ^| 18 - 19100.1051
-echo. 19 - 19100.1055 ^| 20 - 19100.1057 ^| 21 - 19100.1060 ^| 22 - 19100.1062 ^| 23 - 19100.1064
-echo. 24 - 19100.1065 ^| 25 - 19100.1066 ^| 26 - 19100.1067 ^| 27 - 19100.1070 ^| 28 - 19100.1079
-echo. 29 - 19100.1085 ^| 30 - 19100.1086 ^| 31 - 19100.1089 ^| 32 - 19100.1090 ^|
+echo. 05 - 19100.1008 ^| 06 - 19100.1009 ^| 07 - 19100.1019 ^| 08 - 19100.1021 ^| 09 - 19100.1023
+echo. 10 - 19100.1025 ^| 11 - 19100.1026 ^| 12 - 19100.1031 ^| 13 - 19100.1035 ^| 14 - 19100.1039
+echo. 15 - 19100.1041 ^| 16 - 19100.1045 ^| 17 - 19100.1047 ^| 18 - 19100.1050 ^| 19 - 19100.1051
+echo. 20 - 19100.1055 ^| 21 - 19100.1057 ^| 22 - 19100.1060 ^| 23 - 19100.1062 ^| 24 - 19100.1064
+echo. 25 - 19100.1065 ^| 26 - 19100.1066 ^| 27 - 19100.1067 ^| 28 - 19100.1070 ^| 29 - 19100.1079
+echo. 30 - 19100.1085 ^| 31 - 19100.1086 ^| 32 - 19100.1089 ^| 33 - 19100.1090 ^| 34 - 19101.1109
 echo.%line3%
 echo.%TeamSVC%
 echo.
@@ -652,35 +650,37 @@ echo.%line%
 set /p Team=%TxtDes1%
 if %Team% equ E2 goto :setupdateid
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
-if %Team% equ 32 (set id=53794d88-eed7-4baf-a2eb-a427a15cc5d7&goto :uupdownload)
-if %Team% equ 31 (set id=4ff82994-69ba-4bec-ab26-3383a1d0fc90&goto :uupdownload)
-if %Team% equ 30 (set id=e28e1d05-667f-434c-9702-89c9e34ed38b&goto :uupdownload)
-if %Team% equ 29 (set id=91f38675-4298-43d9-a258-3130369a6829&goto :uupdownload)
-if %Team% equ 28 (set id=59e58c68-0c40-4cee-880f-500bf04bbcfa&goto :uupdownload)
-if %Team% equ 27 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
-if %Team% equ 26 (set id=2bf7a0c9-a2b0-4333-a3e8-7eed56f0e897&goto :uupdownload)
-if %Team% equ 25 (set id=61ab3641-436e-4f6a-9999-0be13c098849&goto :uupdownload)
-if %Team% equ 24 (set id=ab2ce6b7-8edf-4e47-9131-d71aa5600cba&goto :uupdownload)
-if %Team% equ 23 (set id=f54ffb54-4fd0-4c49-b150-613755a69f3c&goto :uupdownload)
-if %Team% equ 22 (set id=8a1d71c1-6cb9-4cbf-9f9b-ab9b885282e7&goto :uupdownload)
-if %Team% equ 21 (set id=763a6025-9e33-4b10-abed-1c41a89d3984&goto :uupdownload)
-if %Team% equ 20 (set id=6d51e694-7463-4b0d-afa8-06a88f52c9c7&goto :uupdownload)
-if %Team% equ 19 (set id=e84a6181-f9c1-41c1-be71-aea13769a001&goto :uupdownload)
-if %Team% equ 18 (set id=93d95e92-96f9-42cf-9d80-e827b8de3cbc&goto :uupdownload)
-if %Team% equ 17 (set id=abb92723-44a1-44f5-a343-9ca1c339457f&goto :uupdownload)
-if %Team% equ 16 (set id=bad2c98a-c8ac-4dd7-a1fb-ea6b2a94f538&goto :uupdownload)
-if %Team% equ 15 (set id=a29357bc-cc1b-4d65-8a5b-19a59f81b602&goto :uupdownload)
-if %Team% equ 14 (set id=131f4140-7928-4178-8e9b-1f770896dc30&goto :uupdownload)
-if %Team% equ 13 (set id=217267dd-e9f5-4c49-85f6-0d221b2535ed&goto :uupdownload)
-if %Team% equ 12 (set id=d48c82d9-9b41-4153-b1f6-7217231f145a&goto :uupdownload)
-if %Team% equ 11 (set id=ce6e37a3-0942-4012-ba22-8dd38877a1c7&goto :uupdownload)
-if %Team% equ 10 (set id=6f9e5521-5cb0-4b9c-9e65-c385781a005e&goto :uupdownload)
-if %Team% equ 09 (set id=39d733eb-bb06-440c-8cfb-b1bc4492293a&goto :uupdownload)
-if %Team% equ 08 (set id=cb9a18fe-485d-4b57-92b6-85a398725c3e&goto :uupdownload)
-if %Team% equ 07 (set id=c9d0ea4a-6874-45f7-bb63-929e48742785&goto :uupdownload)
-if %Team% equ 06 (set id=40a6c352-b0f4-49a6-a0c3-3dc1537e1d3f&goto :uupdownload)
-if %Team% equ 05 (set id=87364f44-95b4-4bf0-917e-5b28f266610d&goto :uupdownload)
-if %Team% equ 04 (set id=1503c1dc-82c3-4ebd-8299-afd449411884&goto :uupdownload)
+if %Team% equ 34 (set id=373a32fd-5a69-47d1-a5bb-e80f19b93820&goto :uupdownload)
+if %Team% equ 33 (set id=53794d88-eed7-4baf-a2eb-a427a15cc5d7&goto :uupdownload)
+if %Team% equ 32 (set id=4ff82994-69ba-4bec-ab26-3383a1d0fc90&goto :uupdownload)
+if %Team% equ 31 (set id=e28e1d05-667f-434c-9702-89c9e34ed38b&goto :uupdownload)
+if %Team% equ 30 (set id=91f38675-4298-43d9-a258-3130369a6829&goto :uupdownload)
+if %Team% equ 29 (set id=59e58c68-0c40-4cee-880f-500bf04bbcfa&goto :uupdownload)
+if %Team% equ 28 (set id=b8c1be9f-b120-486f-b9db-32308905439e&goto :uupdownload)
+if %Team% equ 27 (set id=2bf7a0c9-a2b0-4333-a3e8-7eed56f0e897&goto :uupdownload)
+if %Team% equ 26 (set id=61ab3641-436e-4f6a-9999-0be13c098849&goto :uupdownload)
+if %Team% equ 25 (set id=ab2ce6b7-8edf-4e47-9131-d71aa5600cba&goto :uupdownload)
+if %Team% equ 24 (set id=f54ffb54-4fd0-4c49-b150-613755a69f3c&goto :uupdownload)
+if %Team% equ 23 (set id=8a1d71c1-6cb9-4cbf-9f9b-ab9b885282e7&goto :uupdownload)
+if %Team% equ 22 (set id=763a6025-9e33-4b10-abed-1c41a89d3984&goto :uupdownload)
+if %Team% equ 21 (set id=6d51e694-7463-4b0d-afa8-06a88f52c9c7&goto :uupdownload)
+if %Team% equ 20 (set id=e84a6181-f9c1-41c1-be71-aea13769a001&goto :uupdownload)
+if %Team% equ 19 (set id=93d95e92-96f9-42cf-9d80-e827b8de3cbc&goto :uupdownload)
+if %Team% equ 18 (set id=abb92723-44a1-44f5-a343-9ca1c339457f&goto :uupdownload)
+if %Team% equ 17 (set id=bad2c98a-c8ac-4dd7-a1fb-ea6b2a94f538&goto :uupdownload)
+if %Team% equ 16 (set id=a29357bc-cc1b-4d65-8a5b-19a59f81b602&goto :uupdownload)
+if %Team% equ 15 (set id=131f4140-7928-4178-8e9b-1f770896dc30&goto :uupdownload)
+if %Team% equ 14 (set id=217267dd-e9f5-4c49-85f6-0d221b2535ed&goto :uupdownload)
+if %Team% equ 13 (set id=d48c82d9-9b41-4153-b1f6-7217231f145a&goto :uupdownload)
+if %Team% equ 12 (set id=ce6e37a3-0942-4012-ba22-8dd38877a1c7&goto :uupdownload)
+if %Team% equ 11 (set id=6f9e5521-5cb0-4b9c-9e65-c385781a005e&goto :uupdownload)
+if %Team% equ 10 (set id=39d733eb-bb06-440c-8cfb-b1bc4492293a&goto :uupdownload)
+if %Team% equ 09 (set id=cb9a18fe-485d-4b57-92b6-85a398725c3e&goto :uupdownload)
+if %Team% equ 08 (set id=c9d0ea4a-6874-45f7-bb63-929e48742785&goto :uupdownload)
+if %Team% equ 07 (set id=40a6c352-b0f4-49a6-a0c3-3dc1537e1d3f&goto :uupdownload)
+if %Team% equ 06 (set id=87364f44-95b4-4bf0-917e-5b28f266610d&goto :uupdownload)
+if %Team% equ 05 (set id=1503c1dc-82c3-4ebd-8299-afd449411884&goto :uupdownload)
+if %Team% equ 04 (set id=2bbf5b05-bddf-4121-bb3d-01c9dff6986e&goto :uupdownload)
 if %Team% equ 03 (set id=ac417a02-f061-4f49-884d-9f427e1edfed&goto :uupdownload)
 if %Team% equ 02 (set id=8b2d3ddf-f617-4df4-a1da-15dcbf0e757c&goto :uupdownload)
 if %Team% equ 01 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
@@ -738,6 +738,7 @@ if %error% equ 0 call :finish
 if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
+echo.
 echo.
 echo.
 echo.%line%
@@ -844,14 +845,12 @@ echo.
 echo.%ErrorTxt5%%DETECTED_ERROR%
 echo.
 echo.
-echo.%ErrorTxt6%
-echo.
+echo.%ErrorTxt61%
+echo.- %ErrorTxt62%
+echo.- %ErrorTxt63%
+echo.- %ErrorTxt64%
 echo.
 echo.%ErrorTxt7%
-echo.
-echo.
-echo.
-echo.
 echo.
 echo.
 echo.
@@ -876,5 +875,5 @@ exit /b
 
 ::-------------------------------------------------------------------------------------------
 :EOF
-exit
+exit /b
 ::-------------------------------------------------------------------------------------------
