@@ -20,28 +20,27 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 
 cd /d "%~dp0"
-color f0
-call files\lang.cmd -en
 
-::-------------------------------------------------------------------------------------------
-:: 其他参数
-::-------------------------------------------------------------------------------------------
-set "Network="
-set "Lang="
-set "SKU="
-set "cert=--check-certificate=false "
-set "bckps="
-::-------------------------------------------------------------------------------------------
+color f0
+
+call files\lang.cmd -en
 
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.1"
+set "Ver=4.2"
 set "DispVersion=v%Ver%"
-set "udBuild=700"
+set "udBuild=740"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
+
+::-------------------------------------------------------------------------------------------
+:: 版本类型控制，不应修改其中的任何内容
+::-------------------------------------------------------------------------------------------
+set "PurposeA=%PurposeA%"
+set "PurposeB=%PurposeB%"
+set "Purpose=%PurposeB%"
 
 if NOT "%cd%"=="%cd: =%" (
     echo %PathSpace1%
@@ -71,12 +70,13 @@ IF %ERRORLEVEL% GTR 0 (
 
 SETLOCAL DISABLEDELAYEDEXPANSION
 goto :EOF
+::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 语言选择
 ::-------------------------------------------------------------------------------------------
 :langselect
-title %langchoose% %title3% - %PurposeB%
+title %langchoose% - %PurposeB%
 
 echo %line%
 echo %langwelcome%
@@ -98,18 +98,27 @@ echo.
 echo.
 echo.
 echo.
+echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesC%
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
-echo.
-echo.%line%
+echo.%line2%
 choice /c 12 /n /m "%dlangtxt%"
 if errorlevel 2 (set dlang=2 & call :dlang)
 if errorlevel 1 (set dlang=1 & call :dlang)
+::-------------------------------------------------------------------------------------------
+
+::-------------------------------------------------------------------------------------------
+:: SKU 版本指示
+::-------------------------------------------------------------------------------------------
+set "PurposeA=%PurposeA%"
+set "PurposeB=%PurposeB%"
+set "Purpose=%PurposeA%"
+set "WizTitle=%title1%%title3% %DispVersion%"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -168,13 +177,13 @@ echo %line%
 echo %WelDes%
 echo.
 echo.
-echo.    A - %Def%
 echo.
+echo.    A - %Def%
 echo.
 echo.    B - %Alter%
 echo.
-echo.
 echo.    C - %StartSite%
+echo.
 echo.
 echo.
 echo.
@@ -183,7 +192,7 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesC%
+echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
 echo.
 echo.^(c^) 2016-2022 %CopyRight%
 echo.%VerDes%
@@ -601,11 +610,10 @@ set "id=%id%"&goto :uupdownload
 :: UUP 文件下载主进程
 ::-------------------------------------------------------------------------------------------
 :uupdownload
-
-
 cls
-title %WizTitle% - %Purpose% - %SearchUpdAPPScript%
+title %title1%%title3% %Ver1% - %Purpose% - %SearchUpdScript%
 
+(
 echo.%line%
 echo %APPDScript%
 echo.%line%
@@ -615,8 +623,6 @@ if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
-cls
-title %WizTitle% - %Purpose% - %DLAPPFiles%
 echo.%line%
 echo %APPDFiles%
 echo.%line%
@@ -624,7 +630,6 @@ echo.%line%
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 cls
-title %title1%%title3% %DispVersion% - %Purpose% - %SearchUpdScript%
 echo.%line%
 echo.%UPDScript%
 echo.%line%
@@ -635,7 +640,7 @@ for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% - %Purpose% - %DLUUPFiles%
+title %title1%%title3% %DispVersion% - %Purpose% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%
@@ -644,13 +649,14 @@ echo.%line%
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 if %ERRORLEVEL% EQU 0 set error=0&call :ERROR & exit /b 1
 
+)
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 准备转换工具
 ::-------------------------------------------------------------------------------------------
-:Prepareuup2ISO
 cls
+:Prepareuup2ISO
 cd /d "%~dp0"
 if NOT EXIST %aria2% set error=1&goto :ERROR
 if NOT EXIST %a7z% set error=4&goto :ERROR
@@ -658,7 +664,7 @@ if NOT EXIST %uupConv% set error=4&goto :ERROR
 if NOT EXIST ConvertConfig.ini set error=4&goto :ERROR
 
 cls
-title %WizTitle% - %Purpose% - %ConvertCmd%
+title %title1%%title3% %Ver1% - %Purpose% - %ConvertCmd%
 
 echo %line%
 echo %PrepConverter%
@@ -684,8 +690,8 @@ goto :EOF
 ::-------------------------------------------------------------------------------------------
 :ERROR
 cls
-if %error% equ 0 title %WizTitle% - %Purpose% - %DLFinish%
-if %error% gtr 0 title %WizTitle% - %Purpose% - %FoundError%
+if %error% equ 0 title %title1%%title2% %Ver1% - %Purpose% - %DLFinish%
+if %error% gtr 0 title %title1%%title2% %Ver1% - %Purpose% - %FoundError%
 
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
@@ -698,15 +704,13 @@ if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 if %error% equ 4 call :no_file_error
-echo.
-echo.
 echo.%line%
 if %error% equ 0 (
 pause
 goto :Prepareuup2ISO
 ) else if %error% gtr 0 (
 pause
-goto :EOF
+exit /b
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -726,6 +730,8 @@ echo.
 echo.
 echo.
 echo.%ConvertTip%
+echo.
+echo.
 echo.
 echo.
 echo.
@@ -804,21 +810,21 @@ echo.
 echo.
 echo.
 echo.
-echo  %ErrorTxt5%%DETECTED_ERROR%
+echo.%ErrorTxt5%%DETECTED_ERROR%
 echo.
 echo.
-echo  %ErrorTxt6%
+echo.%ErrorTxt61%
+echo.- %ErrorTxt62%
+echo.- %ErrorTxt63%
+echo.- %ErrorTxt64%
+echo.
+echo.%ErrorTxt7%
 echo.
 echo.
-echo  %ErrorTxt7%
 echo.
 echo.
 echo.
 echo.
-echo.
-echo.
-echo.
-echo.%FileDirectory%
 echo.
 echo.
 )
@@ -868,5 +874,5 @@ exit /b
 
 ::-------------------------------------------------------------------------------------------
 :EOF
-exit
+exit /b
 ::-------------------------------------------------------------------------------------------
