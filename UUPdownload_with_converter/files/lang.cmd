@@ -17,10 +17,10 @@ pause>nul
 exit /b
 
 :langver
-set "LVer=4.1"
-set "LVerMax=Build 740"
-set "LMVerMax=1.0"
-set "LVerMin=Build 720"
+set "LVer=4.3"
+set "LVerMax=Build 765"
+set "LMVerMax=0.1"
+set "LVerMin=Build 745"
 set "LMVerMin=0"
 exit /b
 
@@ -87,11 +87,13 @@ set "PlatDescription=This page requires you to select the type of edition you wa
 set "ClientTypeDescription=If the version you want to download is Home, Professional, etc., use the following option:"
 set "ClientType=Client Editions"
 set "ServerTypeDescription=If the version you want to download is Server Standard, etc., use the following option:"
+set "ServerTypeDescription2=Currently, only Azure Stack HCI is supported, use the following option:"
 set "ServerType=Server Editions"
 
 set "LangTitle=                                 Select the language used by UUP OS Build"
 set "LangDes=Choose the language version of your operating system on this page. Valid range: Core, CoreN, CoreCountrySpecific, &echo Professional, Team. This program only supports Team Edition, version 2004 and above.  &echo."
 set "LangServerDes=This page selects the language editions of the Server operating system you are using. Valid range: Azure Stack HCI,&echo Datacenter and Core, Standard and Core. Only supports version 21H2, Build 20348 and above."
+set "LangServerDes2=This page selects the language editions of the Server operating system you are using. Valid range: Azure Stack HCI&echo Only supports version 23H2, Build 25217 and above."
 set "ListLang=Available Languages List: "
 set "Win11lang=Use this if you are looking for inbox apps download: "
 set "LangMenu01=Arabic   [Saudi Arabia]"
@@ -150,6 +152,7 @@ set "TeamDev=Other Dev Channel Builds"
 set "CombBuild=Download combined editions"
 set "AppDown=Microsoft Store Inbox Apps ^(Build 22563 and above^)"
 set "ServerDes=This page selects a certain Server SKU edition downloaded through UUP. If you want to download the combined edition & echo of the Server UUP file, please select "Download combined editions". The minimum version available on this page is& echo Build 20348 and its updates."
+set "ServerDes2=This page selects a certain Server SKU edition downloaded through UUP. Currently, only Azure Stack HCI is supported.&echo The minimum builds available on this page is Build 25217 and above."
 
 set "EditionTitle=                           Select a combination SKU which you want to download via UUP"
 set "EditionDes=The content of this page is to select the combined SKU version downloaded through UUP. After you select one of the & echo After you select and press "Enter" to confirm, the download will start immediately. combined UUP versions and press "Enter" to confirm, the download will start immediately.& echo Note: The following combination UUP version options are not suitable for all languages."
@@ -185,10 +188,11 @@ set "CodError=The language code you entered is invalid. It does not refer to any
 
 set "BackLangMenu=Return to Select language Version Menu"
 
-set "FillIDTitle=                        Fill in the update ID of the Build you want to download"
+set "FillIDTitle=     Fill with the UUP dump address with the update ID of the version you want to download"
+set "FillIDDes=This page is filled with the UUP dump address with the update ID of the version you want to download, Paste input is supported.& echo Note: The update ID corresponding to each Build and each architecture edition is different. Therefore, you neither & echo need to specifically set which architecture edition to download, nor paste the corresponding update name."
 set "FillIDDes=Fill in the update ID of the Build to be downloaded on this page. Paste input is supported.& echo Note: The update ID corresponding to each Build and each architecture edition is different. Therefore, you neither & echo need to specifically set which architecture edition to download, nor paste the corresponding update name."
-set "IDExample=Update ID Example: "
-set "FillID=Fill in the Update ID: "
+set "IDExample=Address Example: "
+set "FillID=Fill in UUP dump Address with Update ID: "
 
 set "TeamTitle=               Team Edition, Version 2004 and above - Update ID^(s^) Selection"
 set "TeamDes=This page can select UUP files of Team. Team not a General Edition, You don't need fill an Update &echo ID, just select a Build from the menu to start downloading. Some Builds on this page may be &echo deleted or added in future Updates at anytime."
@@ -197,6 +201,7 @@ set "TeamBranch=and related branches"
 set "TeamSVC=The following Update ID(s) are standby update ID(s) of Some Builds:"
 set "TeamDevOth=Other Team Edition Build: "
 
+set "ardlf=aria2c download failed"
 set "UPDScript=Retrieving updated aria2 script..."
 set "APPDScript=Retrieving aria2 script for Apps..."
 set "DLFiles=Attempting to download files..."
@@ -291,11 +296,13 @@ set "PlatDescription=´ËÒ³ÒªÇóÄãÑ¡ÔñÄãÒªÏÂÔØ°æ±¾µÄÀàĞÍ¡£Èç¹ûÄãÒªÏÂÔØµÄÊÇÈç¼ÒÍ¥°æ¡
 set "ClientTypeDescription=Èç¹ûÄãÒªÏÂÔØµÄ°æ±¾ÊÇ¼ÒÍ¥°æ¡¢×¨Òµ°æµÈ°æ±¾£¬ÇëÊ¹ÓÃÒÔÏÂÑ¡Ïî£º"
 set "ClientType=¿Í»§¶Ë"
 set "ServerTypeDescription=Èç¹ûÄãÒªÏÂÔØµÄ°æ±¾ÊÇ Server Standard µÈ°æ±¾£¬ÇëÊ¹ÓÃÒÔÏÂÑ¡Ïî£º"
+set "ServerTypeDescription2=Ä¿Ç°½öÖ§³Ö Azure Stack HCI£¬ÇëÊ¹ÓÃÒÔÏÂÑ¡Ïî£º"
 set "ServerType=·şÎñÆ÷¶Ë"
 
 set "LangTitle=                                    ÇëÑ¡Ôñ UUP °æ±¾Ê¹ÓÃµÄÓïÑÔ"
 set "LangDes=´ËÒ³Ñ¡ÔñÄãÊ¹ÓÃµÄ²Ù×÷ÏµÍ³ÓïÑÔ°æ±¾¡£ÓĞĞ§·¶Î§£º¼ÒÍ¥°æ¼°Æä N °æ¡¢×¨Òµ°æ¼°Æä N °æ¡¢¼ÒÍ¥ÖĞÎÄ°æ¡¢Ğ­Í¬&echo °æ¡£½öÖ§³Ö°æ±¾ 2004 ¼°ÒÔÉÏ°æ±¾µÄĞ­Í¬°æ¡£&echo."
 set "LangServerDes=´ËÒ³Ñ¡ÔñÄãÊ¹ÓÃµÄ Server ²Ù×÷ÏµÍ³ÓïÑÔ°æ±¾¡£ÓĞĞ§·¶Î§£ºAzure Stack HCI¡¢Datacenter ¼°Æä Core¡¢&echo Standard ¼°Æä Core¡£½öÖ§³Ö°æ±¾ 21H2£¬Build 20348 ¼°ÒÔÉÏ°æ±¾¡£"
+set "LangServerDes2=´ËÒ³Ñ¡ÔñÄãÊ¹ÓÃµÄ Server ²Ù×÷ÏµÍ³ÓïÑÔ°æ±¾¡£ÓĞĞ§·¶Î§£ºAzure Stack HCI&echo ½öÖ§³Ö°æ±¾ 23H2£¬Build 25217 ¼°ÒÔÉÏ°æ±¾¡£"
 set "ListLang=¿ÉÓÃµÄÓïÑÔÁĞ±í£º"
 set "Win11lang=Èç¹ûÄãÕıÔÚÑ°ÇóÄÚÖÃÓ¦ÓÃµÄÏÂÔØ£¬ÇëÊ¹ÓÃ´ËÏî£º"
 set "LangMenu01=°¢À­²®Óï    [É³ÌØ°¢À­²®]"
@@ -354,6 +361,7 @@ set "TeamDev=ÆäËû Dev ÇşµÀ°æ±¾"
 set "CombBuild=ÏÂÔØ×éºÏ°æ±¾"
 set "AppDown=Microsoft Store ÄÚÖÃÓ¦ÓÃ£¨Build 22563 ¼°ÒÔÉÏ°æ±¾£©"
 set "ServerDes=´ËÒ³Ñ¡ÔñÍ¨¹ı UUP ÏÂÔØµÄÄ³Ò» Server SKU °æ±¾¡£Èç¹ûÄãÒªÏÂÔØ×éºÏ°æ±¾µÄ Server UUP ÎÄ¼ş£¬ÇëÑ¡Ôñ¡°ÏÂ&echo ÔØ×éºÏ°æ±¾¡±¡£´ËÒ³»ñÈ¡µÄ×îµÍ°æ±¾Îª Build 20348 ¼°Æä¸üĞÂ¡£"
+set "ServerDes2=´ËÒ³Ñ¡ÔñÍ¨¹ı UUP ÏÂÔØµÄÄ³Ò» Server SKU °æ±¾¡£Ä¿Ç°½öÖ§³Ö Azure Stack HCI¡£&echo ´ËÒ³»ñÈ¡µÄ×îµÍ°æ±¾Îª Build 25217 ¼°ÒÔÉÏ°æ±¾¡£"
 
 set "EditionTitle=                                ÇëÑ¡Ôñ×éºÏ SKU °æ±¾ÏÂÔØ"
 set "EditionDes=´ËÒ³ÄÚÈİÊÇÑ¡ÔñÍ¨¹ı UUP ÏÂÔØµÄ×éºÏ SKU °æ±¾¡£ÔÚÄãÑ¡ÔñÆäÖĞµÄÒ»ÖÖ×éºÏ UUP °æ±¾²¢°´¡°Enter¡±¼üÈ·ÈÏ& echo ºó£¬½«»áÁ¢¼´¿ªÊ¼ÏÂÔØ¡£& echo ×¢£ºÒÔÏÂ×éºÏ UUP °æ±¾Ñ¡Ïî²¢·ÇËùÓĞÓïÑÔ¶¼ÊÊºÏ¡£"
@@ -389,10 +397,10 @@ set "CodError=ÄãËùÊäÈëµÄÓïÑÔ´úÂëÊÇÎŞĞ§µÄ¡£Æä²»Ö¸´ú²Ëµ¥ÖĞËùÌá¹©µÄÈÎºÎÒ»¸öÓïÑÔ°æ±¾
 
 set "BackLangMenu=·µ»Øµ½Ñ¡ÔñÓïÑÔ°æ±¾²Ëµ¥"
 
-set "FillIDTitle=                                 ÌîĞ´ÄãÒªÏÂÔØµÄ°æ±¾Ê¹ÓÃµÄ¸üĞÂ ID"
-set "FillIDDes=´ËÒ³ÌîĞ´ÒªÏÂÔØ°æ±¾µÄ¸üĞÂ ID£¬Ö§³ÖÕ³ÌùÊäÈë¡£& echo ×¢£ºÃ¿Ò»¸öÄÚ²¿°æ±¾¼°¸÷ÌåÏµ½á¹¹°æ±¾¶ÔÓ¦µÄ¸üĞÂ ID ÊÇ²»Í¬µÄ¡£Òò´ËÄã¼È²»ĞèÒª×¨ÃÅÉèÖÃÏÂÔØºÎÖÖÌå& echo Ïµ½á¹¹µÄ°æ±¾£¬Ò²²»ĞèÒªÕ³Ìù¶ÔÓ¦µÄ¸üĞÂÃû³Æ¡£"
-set "IDExample=¸üĞÂ ID Ê¾Àı£º"
-set "FillID=ÇëÌîĞ´¸üĞÂ ID£º"
+set "FillIDTitle=                           ÌîĞ´º¬ÓĞÒªÏÂÔØ°æ±¾µÄ¸üĞÂ ID µÄ UUP dump µØÖ·"
+set "FillIDDes=´ËÒ³ÌîĞ´º¬ÓĞÒªÏÂÔØ°æ±¾µÄ¸üĞÂ ID µÄ UUP dump µØÖ·£¬Ö§³ÖÕ³ÌùÊäÈë¡£& echo ×¢£ºÃ¿Ò»¸öÄÚ²¿°æ±¾¼°¸÷ÌåÏµ½á¹¹°æ±¾¶ÔÓ¦µÄ¸üĞÂ ID ÊÇ²»Í¬µÄ¡£Òò´ËÄã¼È²»ĞèÒª×¨ÃÅÉèÖÃÏÂÔØºÎÖÖÌå& echo Ïµ½á¹¹µÄ°æ±¾£¬Ò²²»ĞèÒªÕ³Ìù¶ÔÓ¦µÄ¸üĞÂÃû³Æ¡£"
+set "IDExample=Ê¾Àı£º"
+set "FillID=ÇëÌîĞ´º¬ÓĞ¸üĞÂ ID µÄ UUP dump µØÖ·£º"
 
 set "TeamTitle=                             Ğ­Í¬°æ£¬°æ±¾ 2004 ¼°ÒÔÉÏ¡ª¡ª¸üĞÂ ID Ñ¡Ôñ"
 set "TeamDes=´ËÒ³Ñ¡ÔñĞ­Í¬°æµÄ UUP ÎÄ¼şÏÂÔØ¡£Ğ­Í¬°æ·Ç³£¹æ°æ±¾£¬Äã²»ĞèÒªÌîĞ´¸üĞÂ ID£¬½öĞè´Ó²Ëµ¥ÖĞÑ¡Ôñ°æ±¾ &echo ¼´¿É¿ªÊ¼ÏÂÔØ¡£´ËÒ³ÖĞµÄ²¿·Ö°æ±¾ËæÊ±¶¼ÓĞ¿ÉÄÜÔÚºóĞø¸üĞÂÖĞÉ¾³ı»òĞÂÔö¡£"
@@ -401,6 +409,7 @@ set "TeamBranch=ºÍÏà¹Ø·ÖÖ§"
 set "TeamSVC=ÒÔÏÂÎª²¿·Ö°æ±¾µÄ±¸ÓÃ¸üĞÂ ID£º"
 set "TeamDevOth=ÆäËûĞ­Í¬°æÄÚ²¿°æ±¾£º"
 
+set "ardlf=aria2c ÏÂÔØÊ§°Ü"
 set "UPDScript=ÕıÔÚ¼ìË÷ÊÊÓÃÓÚ¸üĞÂµÄ aria2 ½Å±¾¡­¡­"
 set "APPDScript=ÕıÔÚ¼ìË÷ÊÊÓÃÓÚÓ¦ÓÃµÄ aria2 ½Å±¾¡­¡­"
 set "DLFiles=ÕıÔÚ³¢ÊÔÏÂÔØÎÄ¼ş¡­¡­"
