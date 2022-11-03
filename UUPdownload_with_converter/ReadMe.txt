@@ -11,15 +11,15 @@
 
 由于 UUP Dump 的更改，现在单独列出更新 ID。但是，这并不意味着你无法再获取更新 ID。在选择了你要下载的版本后，你在浏览器地址栏看到的是如下地址：
 
-https://uupdump.net/selectlang.php?id=7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
+https://uupdump.net/zh-cn/selectlang.php?id=7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
 
 其中，id 后面的即为更新 ID。复制并粘贴到向导指定页面中即可继续像以前一样下载 UUP 文件。
 
 如果你还希望采用以前的方式获取更新 ID，第一种方法是在 UUP Dump 首页的快速选项获取更新 ID：
 
-https://uupdump.net/fetchupd.php?arch=arch&ring=ring&build=build&lang=lang
+https://uupdump.net/zh-cn/fetchupd.php?arch=arch&ring=ring&build=build&lang=lang
 或
-https://uupdump.net/fetchupd.php?arch=arch&sku=sku&ring=ring&build=build&lang=lang
+https://uupdump.net/zh-cn/fetchupd.php?arch=arch&sku=sku&ring=ring&build=build&lang=lang
 
 你可以通过替换 build、ring 和 sku 进行版本的筛选。允许值如下：
 sku：具体 SKU 版本代号，如专业版为 125。
@@ -30,18 +30,6 @@ lang：可选，位于整个地址的最后。将直接决定网站页面文本�
 具体使用的版本和通道受制于当前推送版本本身。
 
 最后一种方法是可以前往以下站点获取：https://uupdump.7788.work/?lang=zh-cn
-
-此部分获取方式随时发生变化，因此相应更改将会随着向导的更新而推出。
-
-===============================================================================
-更新 ID 的获取（工具）
-===============================================================================
-
-由于 UUP Dump 的更改，现在单独列出更新 ID。但是，这并不意味着你无法再获取更新 ID。在选择了你要下载的版本后，你在浏览器地址栏看到的是如下地址：
-
-https://uupdump.net/selectlang.php?id=7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
-
-你可以通过向导内置工具 get_update_id.cmd 进行更新 ID 的获取。通过提示进行操作。
 
 此部分获取方式随时发生变化，因此相应更改将会随着向导的更新而推出。
 
@@ -182,7 +170,7 @@ A - 客户端
 2 - 19042.545 (20H2_release 和相关分支)
 3 - 19042.572 (20H2_release 和相关分支)
 同时还提供了尚在预览的 Build 19100 和 Build 19101 的下载：
-Build 19100.1008~Build 19101.1109
+Build 19100.1008~Build 19101.1112
 选择其中的一个之后，将直接开始下载。
 对于 Build 19100（不含）以上的协同版，以及所有位于 Dev 渠道的协同版，你可在协同版菜单中选择“其他 Dev 渠道版本”进行下载。
 
@@ -264,7 +252,7 @@ Build 19100.1008~Build 19101.1109
 
 Windows 11（22621.457）x64 7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
 
-Windows 11 (22000.856) x64 d82f8ecf-202d-47ac-89a2-2562a7528027
+Windows 11（22000.856）x64 d82f8ecf-202d-47ac-89a2-2562a7528027
 
 ===============================================================================
 贡献者（感谢）
