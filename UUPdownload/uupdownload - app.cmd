@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.3"
+set "Ver=4.4"
 set "DispVersion=v%Ver%"
-set "udBuild=770"
+set "udBuild=800"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -119,19 +119,19 @@ if exist aria2_download.log del /s /q aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
 
 cls
-echo.%line%
-echo.%WelcomeTitle%
-echo.%line%
-echo.%WelDes%
+echo %line%
+echo %WelcomeTitle%
+echo %line%
+echo %WelDes%
+echo.
 echo.
 echo.
 echo.    A - %Def%
 echo.
-echo.
 echo.    B - %Alter%
 echo.
-echo.
 echo.    C - %StartSite%
+echo.
 echo.
 echo.
 echo.
@@ -147,7 +147,7 @@ echo.%VerDes%
 echo.
 echo.%line%
 choice /c ABC /n /m "%TxtDes1%"
-if errorlevel 3 (start https://uupdump.net/known.php?lang=zh-cn&goto :first)
+if errorlevel 3 (start https://uupdump.net/known.php%langsite%&goto :first)
 if errorlevel 2 (set "cert=--check-certificate=false "&goto :second)
 if errorlevel 1 (set "cert= "&goto :second)
 ::-------------------------------------------------------------------------------------------
@@ -554,7 +554,7 @@ echo.%line%
 echo.%FillIDDes%
 echo.
 echo.%line2%
-echo.%IDExample%https://uupdump.net/zh-cn/selectlang.php?id=abcd1234
+echo.%IDExample%https://uupdump.net/selectlang.php?id=abcd1234
 echo.https://uupdump.net/download.php?id=abcd1234^&pack=lang^&edition=core
 echo.%line2%
 echo.
@@ -578,34 +578,15 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle% - %Purpose% - %SearchUpdAPPScript%
+title %WizTitle%- %Purpose% - %SearchUpdScript%
 
 cd /d "%~dp0"
-if NOT EXIST %aria2% call :DOWNLOAD_ARIA2 || (echo %ardlf% & exit /b)
+if NOT EXIST %aria2% set error=1&goto :ERROR
 
-echo.%line%
-echo %APPDScript%
-echo.%line%
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=neutral&edition=app&aria2=2"
-if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
-
-for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
-if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
-
-cls
-title %WizTitle% - %Purpose% - %DLAPPFiles%
-echo.%line%
-echo %APPDFiles%
-echo.%line%
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -x16 -s16 -j25 -c -R -d"%destDir%" -i"%aria2Script%"
-if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
-
-cls
-title %WizTitle% - %Purpose% - %SearchUpdScript%
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+%aria2% %cert%-x16 -s16 -d"%cd%" -o"%aria2Script%" "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
@@ -685,7 +666,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -707,7 +687,6 @@ echo.%ErrorTxt2%
 echo.
 echo.%FileExample%
 start https://aria2.github.io/
-echo.
 echo.
 echo.
 echo.
@@ -741,7 +720,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -763,7 +741,6 @@ echo.- %ErrorTxt63%
 echo.- %ErrorTxt64%
 echo.
 echo.%ErrorTxt7%
-echo.
 echo.
 echo.
 echo.
