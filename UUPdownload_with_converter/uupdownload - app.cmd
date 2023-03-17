@@ -25,12 +25,13 @@ color f0
 
 call files\lang.cmd -en
 
+
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.3"
+set "Ver=4.4"
 set "DispVersion=v%Ver%"
-set "udBuild=770"
+set "udBuild=800"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -115,14 +116,14 @@ echo.
 echo.
 echo.
 echo.
-echo.%WizInfo%
-echo.%line2%
-echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
+echo %WizInfo%
+echo %line2%
+echo %WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
+echo %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
 echo.
-echo.^(c^) 2016-2022 %CopyRight%
-echo.%VerDes%
-echo.%line2%
+echo ^(c^) 2016-2022 %CopyRight%
+echo %VerDes%
+echo %line2%
 choice /c 12 /n /m "%dlangtxt%"
 if errorlevel 2 (set dlang=2 & call :dlang)
 if errorlevel 1 (set dlang=1 & call :dlang)
@@ -622,7 +623,7 @@ echo.%line%
 echo.%FillIDDes%
 echo.
 echo.%line2%
-echo.%IDExample%https://uupdump.net/zh-cn/selectlang.php?id=abcd1234
+echo.%IDExample%https://uupdump.net/selectlang.php?id=abcd1234
 echo.https://uupdump.net/download.php?id=abcd1234^&pack=lang^&edition=core
 echo.%line2%
 echo.
@@ -748,6 +749,9 @@ if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 if %error% equ 4 call :no_file_error
+echo.
+echo.
+echo.
 echo.%line%
 if %error% equ 0 (
 pause
@@ -774,7 +778,6 @@ echo.
 echo.
 echo.
 echo.%ConvertTip%
-echo.
 echo.
 echo.
 echo.
@@ -812,7 +815,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -834,7 +836,6 @@ echo.
 echo.
 echo.
 echo.
-echo.%FileDirectory%
 echo.
 echo.
 echo.
@@ -870,7 +871,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -897,7 +897,6 @@ echo.
 echo.
 echo.
 echo.
-echo.%FileDirectory%
 echo.
 echo.
 )

@@ -11,15 +11,15 @@
 
 由于 UUP Dump 的更改，现在单独列出更新 ID。但是，这并不意味着你无法再获取更新 ID。在选择了你要下载的版本后，你在浏览器地址栏看到的是如下地址：
 
-https://uupdump.net/zh-cn/selectlang.php?id=7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
+https://uupdump.net/selectlang.php?id=7c7aac60-93b5-4733-b7ee-d6fd13c9bce6
 
 其中，id 后面的即为更新 ID。复制并粘贴到向导指定页面中即可继续像以前一样下载 UUP 文件。
 
 如果你还希望采用以前的方式获取更新 ID，第一种方法是在 UUP Dump 首页的快速选项获取更新 ID：
 
-https://uupdump.net/zh-cn/fetchupd.php?arch=arch&ring=ring&build=build&lang=lang
+https://uupdump.net/fetchupd.php?arch=arch&ring=ring&build=build&lang=lang
 或
-https://uupdump.net/zh-cn/fetchupd.php?arch=arch&sku=sku&ring=ring&build=build&lang=lang
+https://uupdump.net/fetchupd.php?arch=arch&sku=sku&ring=ring&build=build&lang=lang
 
 你可以通过替换 build、ring 和 sku 进行版本的筛选。允许值如下：
 sku：具体 SKU 版本代号，如专业版为 125。
@@ -165,14 +165,19 @@ A - 客户端
 ===============================================================================
 
 此工具仅支持版本 2004 及以上版本的协同版下载，此工具提供的版本数量和信息由 UUPdump 数据库决定。具体执行如下：
-在使用方式的第三步中，按 3 并按“Enter”键后，你将会有三个版本选择：
-1 - 19042.538 (20H2_release 和相关分支)
-2 - 19042.545 (20H2_release 和相关分支)
-3 - 19042.572 (20H2_release 和相关分支)
-同时还提供了尚在预览的 Build 19100 和 Build 19101 的下载：
-Build 19100.1008~Build 19101.1112
-选择其中的一个之后，将直接开始下载。
-对于 Build 19100（不含）以上的协同版，以及所有位于 Dev 渠道的协同版，你可在协同版菜单中选择“其他 Dev 渠道版本”进行下载。
+在使用方式的第三步中，按 3 并按“Enter”键后，你将会有多个项目选择：
+Windows 10 Build 15063 及其版本：
+ A - Windows 10 版本 1703 (协同版 rs2_release 和相关分支)
+Windows 10 Build 1904x 及其版本：
+ B - Windows 10 版本 2004 (协同版 vb_release 和相关分支)
+ C - Windows 10 版本 20H2 (协同版 20H2_release 和相关分支)
+ D - Windows 10 版本 22H2 (协同版 22H2_release 和相关分支)
+Windows 10 Build 1910x 及其版本：
+本部分版本分为 Build 19100 和 Build 19101，这些版本没有定版。
+ E - 协同版 Dev 渠道版本
+如果你想要下载的版本不在以上任何类别，你需要使用此项方可下载：
+ F - 其他协同版 Dev 渠道版本
+选择其中的一个之后，将会进入到各自的页面，之后选择一个版本，将直接开始下载。
 
 注意事项：
 某些协同版不支持全部语言，仅支持少数语言。
