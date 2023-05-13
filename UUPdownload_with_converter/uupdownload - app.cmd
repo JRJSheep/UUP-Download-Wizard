@@ -29,19 +29,18 @@ call files\lang.cmd -en
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.4"
+set "Ver=4.5"
 set "DispVersion=v%Ver%"
-set "udBuild=800"
+set "udBuild=830"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
-:: 版本类型控制、不应修改其中的任何内容
+:: SKU 版本指示
 ::-------------------------------------------------------------------------------------------
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeB%"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -118,24 +117,15 @@ echo.
 echo.
 echo %WizInfo%
 echo %line2%
-echo %WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
-echo %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
+echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo ^(c^) 2016-2022 %CopyRight%
+echo ^(c^) 2016-2023 %CopyRight%
 echo %VerDes%
 echo %line2%
 choice /c 12 /n /m "%dlangtxt%"
 if errorlevel 2 (set dlang=2 & call :dlang)
 if errorlevel 1 (set dlang=1 & call :dlang)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: SKU 版本指示
-::-------------------------------------------------------------------------------------------
-set "PurposeA=%PurposeA%"
-set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeA%"
-set "WizTitle=%Title1%%Title3% %DispVersion%"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -153,12 +143,12 @@ set "destDir=UUPs"
 ::-------------------------------------------------------------------------------------------
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeB%"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 步骤明细
 ::-------------------------------------------------------------------------------------------
+set "WizTitle=%Title1%%Title2% %DispVersion%"
 set "SelectLang=%SelectLang%"
 set "SelectSKU1=%SelectSKU%"
 set "SelectSKUGroup=%SelectSKUGroup%"
@@ -174,7 +164,7 @@ set "FoundError=%FoundError%"
 ::-------------------------------------------------------------------------------------------
 :: 网络预先设置
 ::-------------------------------------------------------------------------------------------
-title %WizTitle% %Ver1% - %Purpose%
+title %WizTitle% %Ver1% - %PurposeB%
 
 :first
 cls
@@ -209,9 +199,9 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
+echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo.^(c^) 2016-2022 %CopyRight%
+echo.^(c^) 2016-2023 %CopyRight%
 echo.%VerDes%
 echo.
 echo.%line%
@@ -226,7 +216,7 @@ if errorlevel 1 (set "cert= "&goto :second)
 ::-------------------------------------------------------------------------------------------
 :second
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectPlat%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectPlat%
 
 echo %line%
 echo.%PlatTitle%
@@ -267,7 +257,7 @@ if errorlevel 1 goto :clientlang
 ::-------------------------------------------------------------------------------------------
 :clientlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectClientLang%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectClientLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -346,7 +336,7 @@ if %SKU% equ b goto :second
 ::-------------------------------------------------------------------------------------------
 :langserver
 cls
-title %WizTitle%- %Purpose% - %SelectServerLang%
+title %WizTitle%- %PurposeB% - %SelectServerLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -404,10 +394,10 @@ if %Lang% lss 01 goto :unsupportlang
 ::-------------------------------------------------------------------------------------------
 :chooseclientedition
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKU1%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKU1%
 
 cls
-title %WizTitle% %DispVersion% - %Purpose% - %SelectSKU1%
+title %WizTitle% %DispVersion% - %PurposeB% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -452,7 +442,7 @@ if errorlevel 1 (set SKU=core&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseclienteditiongroup
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKUGroup%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -498,7 +488,7 @@ if errorlevel 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseserveredition
 cls
-title %WizTitle%- %Purpose% - %SelectSKU1%
+title %WizTitle%- %PurposeB% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -539,7 +529,7 @@ if errorlevel 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :unsupportclientlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %UnsupportedLang%
+title %WizTitle% %Ver1% - %PurposeB% - %UnsupportedLang%
 color f4
 echo %line%
 echo %WarTitle%
@@ -577,7 +567,7 @@ if %choosemenu% equ 1 (color f0 & goto :clientlang)
 ::-------------------------------------------------------------------------------------------
 :unsupportserverlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %UnsupportedLang%
+title %WizTitle% %Ver1% - %PurposeB% - %UnsupportedLang%
 color f4
 echo %line%
 echo %WarTitle%
@@ -615,7 +605,7 @@ if %choosemenu% equ 1 (color f0 & goto :langserver)
 ::-------------------------------------------------------------------------------------------
 :setupdateid
 cls
-title %WizTitle% %Ver1% - %Purpose% - %WriteBuildID%
+title %WizTitle% %Ver1% - %PurposeB% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -647,7 +637,7 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SearchUpdScript%
+title %WizTitle% %Ver1% - %PurposeB% - %SearchUpdScript%
 
 (
 echo.%line%
@@ -676,7 +666,7 @@ for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% %DispVersion% - %Purpose% - %DLUUPFiles%
+title %WizTitle% %DispVersion% - %PurposeB% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%
@@ -709,7 +699,7 @@ if NOT EXIST %uupConv% set error=4&goto :ERROR
 if NOT EXIST ConvertConfig.ini set error=4&goto :ERROR
 
 cls
-title %WizTitle% %Ver1% - %Purpose% - %ConvertCmd%
+title %WizTitle% %Ver1% - %PurposeB% - %ConvertCmd%
 
 echo %line%
 echo %PrepConverter%
@@ -735,8 +725,8 @@ goto :EOF
 ::-------------------------------------------------------------------------------------------
 :ERROR
 cls
-if %error% equ 0 title %WizTitle% %DispVersion% - %Purpose% - %DLFinish%
-if %error% gtr 0 title %WizTitle% %DispVersion% - %Purpose% - %FoundError%
+if %error% equ 0 title %WizTitle% %DispVersion% - %PurposeB% - %DLFinish%
+if %error% gtr 0 title %WizTitle% %DispVersion% - %PurposeB% - %FoundError%
 
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
@@ -749,7 +739,6 @@ if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 if %error% equ 4 call :no_file_error
-echo.
 echo.
 echo.
 echo.%line%
@@ -787,6 +776,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -815,6 +805,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -836,6 +827,7 @@ echo.
 echo.
 echo.
 echo.
+echo.%FileDirectory%
 echo.
 echo.
 echo.
@@ -871,6 +863,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -897,6 +890,7 @@ echo.
 echo.
 echo.
 echo.
+echo.%FileDirectory%
 echo.
 echo.
 )

@@ -28,9 +28,9 @@ call files\lang.cmd -en
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.4"
+set "Ver=4.5"
 set "DispVersion=v%Ver%"
-set "udBuild=800"
+set "udBuild=830"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -40,7 +40,6 @@ set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
 set "PurposeA=%PurposeA%"
 set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeB%"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -119,24 +118,15 @@ echo.
 echo.
 echo %WizInfo%
 echo %line2%
-echo %WizVer% %Ver% ^(%Build% %udBuild%^)  %EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
-echo %LangVer% ^(%LVer%%LangVer2%%LVerMax%^)
+echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
+echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo ^(c^) 2016-2022 %CopyRight%
+echo ^(c^) 2016-2023 %CopyRight%
 echo %VerDes%
 echo %line2%
 choice /c 12 /n /m "%dlangtxt%"
 if errorlevel 2 (set dlang=2 & call :dlang)
 if errorlevel 1 (set dlang=1 & call :dlang)
-
-::-------------------------------------------------------------------------------------------
-:: SKU 版本指示
-::-------------------------------------------------------------------------------------------
-set "PurposeA=%PurposeA%"
-set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeA%"
-set "WizTitle=%Title1%%Title2% %DispVersion%"
-::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
 :: 语言选择
@@ -149,16 +139,9 @@ set "destDir=UUPs"
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
-:: 版本类型控制，不应修改其中的任何内容
-::-------------------------------------------------------------------------------------------
-set "PurposeA=%PurposeA%"
-set "PurposeB=%PurposeB%"
-set "Purpose=%PurposeB%"
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
 :: 步骤明细
 ::-------------------------------------------------------------------------------------------
+set "WizTitle=%Title1%%Title2% %DispVersion%"
 set "SelectLang=%SelectLang%"
 set "SelectSKU1=%SelectSKU%"
 set "SelectSKUGroup=%SelectSKUGroup%"
@@ -175,7 +158,7 @@ set "FoundError=%FoundError%"
 :: 网络预先设置
 ::-------------------------------------------------------------------------------------------
 
-title %WizTitle% %Ver1% - %Purpose%
+title %WizTitle% %Ver1% - %PurposeB%
 
 :first
 cls
@@ -209,9 +192,9 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%Purpose%%EditionApplicableDesB%
+echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo.^(c^) 2016-2022 %CopyRight%
+echo.^(c^) 2016-2023 %CopyRight%
 echo.%VerDes%
 echo.
 echo.%line%
@@ -227,7 +210,7 @@ if errorlevel 1 (set "cert= "&goto :second)
 :second
 
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectPlat%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectPlat%
 
 echo %line%
 echo.%PlatTitle%
@@ -269,7 +252,7 @@ if errorlevel 1 goto :clientlang
 ::-------------------------------------------------------------------------------------------
 :clientlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectClientLang%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectClientLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -349,7 +332,7 @@ if %SKU% equ b goto :second
 ::-------------------------------------------------------------------------------------------
 :langserver
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectServerLang%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectServerLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -407,10 +390,10 @@ if %Lang% lss 01 goto :unsupportlang
 ::-------------------------------------------------------------------------------------------
 :chooseclientedition
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKU1%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKU1%
 
 cls
-title %WizTitle% %DispVersion% - %Purpose% - %SelectSKU1%
+title %WizTitle% %DispVersion% - %PurposeB% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -457,7 +440,7 @@ if errorlevel 1 (set SKU=core&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseclienteditiongroup
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKUGroup%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -503,7 +486,7 @@ if errorlevel 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseserveredition
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKU1%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKU1%
 
 echo %line%
 echo %BuildTitle%
@@ -549,7 +532,7 @@ if errorlevel 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseservereditiongroup
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SelectSKUGroup%
+title %WizTitle% %Ver1% - %PurposeB% - %SelectSKUGroup%
 
 echo %line%
 echo %EditionTitle%
@@ -593,7 +576,7 @@ if errorlevel 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupda
 ::-------------------------------------------------------------------------------------------
 :unsupportclientlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %UnsupportedLang%
+title %WizTitle% %Ver1% - %PurposeB% - %UnsupportedLang%
 color f4
 echo %line%
 echo %WarTitle%
@@ -631,7 +614,7 @@ if %choosemenu% equ 1 (color f0 & goto :clientlang)
 ::-------------------------------------------------------------------------------------------
 :unsupportserverlang
 cls
-title %WizTitle% %Ver1% - %Purpose% - %UnsupportedLang%
+title %WizTitle% %Ver1% - %PurposeB% - %UnsupportedLang%
 color f4
 echo %line%
 echo %WarTitle%
@@ -669,7 +652,7 @@ if %choosemenu% equ 1 (color f0 & goto :langserver)
 ::-------------------------------------------------------------------------------------------
 :setupdateid
 cls
-title %WizTitle% %Ver1% - %Purpose% - %WriteBuildID%
+title %WizTitle% %Ver1% - %PurposeB% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -701,7 +684,7 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle0%
@@ -747,7 +730,7 @@ if errorlevel 1 goto :chooseupdateidteamrs2
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -819,7 +802,7 @@ if %Team% equ a goto :chooseupdateidteamrs2x86
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2x86
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -889,7 +872,7 @@ if %Team% equ a goto :chooseupdateidteamrs2
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2arm64
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -942,7 +925,7 @@ if %Team% equ a goto :chooseupdateidteamrs2x86
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamvb
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle2%
@@ -986,7 +969,7 @@ if errorlevel 1 (set id=300ae013-034b-4cf7-9ed5-d64da6099127&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam20H2
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle3%
@@ -1028,7 +1011,7 @@ if errorlevel 1 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam22H2
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle4%
@@ -1076,7 +1059,7 @@ if errorlevel 1 (set id=2bbf5b05-bddf-4121-bb3d-01c9dff6986e&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamDev
 cls
-title %WizTitle%- %Purpose% - %SelectTeamID%
+title %WizTitle%- %PurposeB% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle5%
@@ -1089,11 +1072,11 @@ echo. 16 - 19100.1055 ^| 17 - 19100.1057 ^| 18 - 19100.1060 ^| 19 - 19100.1062 ^
 echo. 21 - 19100.1065 ^| 22 - 19100.1066 ^| 23 - 19100.1067 ^| 24 - 19100.1070 ^| 25 - 19100.1079
 echo. 26 - 19100.1085 ^| 27 - 19100.1086 ^| 28 - 19100.1089 ^| 29 - 19100.1090 ^| 30 - 19101.1109
 echo. 31 - 19101.1112 ^| 32 - 19101.1116 ^| 33 - 19100.1117 ^| 34 - 19100.1120 ^| 35 - 19100.1121
-echo. 36 - 19101.1122 ^| 37 - 19101.1123 ^| 38 - 19101.1124 ^| 39 - 19101.1125
+echo. 36 - 19101.1122 ^| 37 - 19101.1123 ^| 38 - 19100.1125 ^| 39 - 19100.1127
 echo.%line3%
 echo.%TeamSVC%
 echo.
-echo. E1 - 19100.1045
+echo. E1 - 19100.1045 ^| E2 - 19101.1125
 echo.
 echo.
 echo.
@@ -1107,9 +1090,10 @@ echo.
 echo.%StepDescription2%
 echo.%line%
 set /p Team=%TxtDes1%
+if %Team% equ E2 (set id=b85bdd30-54f8-4166-91bd-2007c75ed3e3&goto :uupdownload)
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
-if %Team% equ 39 (set id=ad0a4637-7a81-4f95-8617-3b65fa53df60&goto :uupdownload)
-if %Team% equ 38 (set id=65622786-ac12-4135-b351-d49a2a155683&goto :uupdownload)
+if %Team% equ 39 (set id=c2023395-8c48-47c0-bcc0-ee799bd084c9&goto :uupdownload)
+if %Team% equ 38 (set id=ad0a4637-7a81-4f95-8617-3b65fa53df60&goto :uupdownload)
 if %Team% equ 37 (set id=ca2723ff-1574-4277-a377-85912f60590e&goto :uupdownload)
 if %Team% equ 36 (set id=590b8181-8c19-44c7-b260-e05aba18c682&goto :uupdownload)
 if %Team% equ 35 (set id=b16a4423-3920-4a7e-a9ff-70ac1f8819ce&goto :uupdownload)
@@ -1155,7 +1139,7 @@ if %Team% equ b goto :chooseupdateidteam
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle% %Ver1% - %Purpose% - %SearchUpdScript%
+title %WizTitle% %Ver1% - %PurposeB% - %SearchUpdScript%
 
 (
 echo %line%
@@ -1168,7 +1152,7 @@ for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% %Ver1% - %Purpose% - %DLUUPFiles%
+title %WizTitle% %Ver1% - %PurposeB% - %DLUUPFiles%
 
 echo %line%
 echo %DLFiles%
@@ -1201,7 +1185,7 @@ if NOT EXIST %uupConv% set error=4&goto :ERROR
 if NOT EXIST ConvertConfig.ini set error=4&goto :ERROR
 
 cls
-title %WizTitle% %Ver1% - %Purpose% - %ConvertCmd%
+title %WizTitle% %Ver1% - %PurposeB% - %ConvertCmd%
 
 echo %line%
 echo %PrepConverter%
@@ -1227,8 +1211,8 @@ goto :EOF
 ::-------------------------------------------------------------------------------------------
 :ERROR
 cls
-if %error% equ 0 title %WizTitle% %DispVersion% - %Purpose% - %DLFinish%
-if %error% gtr 0 title %WizTitle% %DispVersion% - %Purpose% - %FoundError%
+if %error% equ 0 title %WizTitle% %DispVersion% - %PurposeB% - %DLFinish%
+if %error% gtr 0 title %WizTitle% %DispVersion% - %PurposeB% - %FoundError%
 
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
@@ -1241,7 +1225,6 @@ if %error% equ 1 call :aria_error
 if %error% equ 2 call :download_error
 if %error% equ 3 call :uup_error
 if %error% equ 4 call :no_file_error
-echo.
 echo.
 echo.
 echo.%line%
@@ -1279,6 +1262,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -1307,6 +1291,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -1328,6 +1313,7 @@ echo.
 echo.
 echo.
 echo.
+echo.%FileDirectory%
 echo.
 echo.
 echo.
@@ -1363,6 +1349,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 )
 ::-------------------------------------------------------------------------------------------
 
@@ -1389,6 +1376,7 @@ echo.
 echo.
 echo.
 echo.
+echo.%FileDirectory%
 echo.
 echo.
 )
