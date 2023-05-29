@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.5"
+set "Ver=4.6"
 set "DispVersion=v%Ver%"
-set "udBuild=830"
+set "udBuild=850"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -277,7 +277,7 @@ if %SKU% equ b goto :second
 ::-------------------------------------------------------------------------------------------
 :langserver
 cls
-title %WizTitle%- %PurposeA% - %SelectServerLang%
+title %WizTitle% - %PurposeA% - %SelectServerLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -426,7 +426,7 @@ if errorlevel 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseserveredition
 cls
-title %WizTitle%- %PurposeA% - %SelectSKU1%
+title %WizTitle% - %PurposeA% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -506,7 +506,7 @@ if errorlevel 1 goto :clientlang
 ::-------------------------------------------------------------------------------------------
 :unsupportserverlang
 cls
-title %WizTitle%- %PurposeA% - %UnsupportedLang%
+title %WizTitle% - %PurposeA% - %UnsupportedLang%
 color f4
 echo.%line%
 echo.%WarTitle%
@@ -545,7 +545,7 @@ if errorlevel 1 (color f0 & goto :langserver)
 ::-------------------------------------------------------------------------------------------
 :setupdateid
 cls
-title %WizTitle%- %PurposeA% - %WriteBuildID%
+title %WizTitle% - %PurposeA% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -577,22 +577,41 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle%- %PurposeA% - %SearchUpdScript%
+title %WizTitle% - %Purpose% - %SearchUpdAPPScript%
 
 cd /d "%~dp0"
-if NOT EXIST %aria2% set error=1&goto :ERROR
+if NOT EXIST %aria2% call :DOWNLOAD_ARIA2 || (echo %ardlf% & exit /b)
 
 echo.%line%
-echo.%UPDScript%
+echo %APPDScript%
 echo.%line%
-%aria2% %cert%-x16 -s16 -d"%cd%" -o"%aria2Script%" "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=neutral&edition=app&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% - %PurposeA% - %DLUUPFiles%
+title %WizTitle% - %Purpose% - %DLAPPFiles%
+echo.%line%
+echo %APPDFiles%
+echo.%line%
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -x16 -s16 -j25 -c -R -d"%destDir%" -i"%aria2Script%"
+if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
+
+cls
+title %WizTitle% - %Purpose% - %SearchUpdScript%
+echo.%line%
+echo.%UPDScript%
+echo.%line%
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
+
+for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
+if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
+
+cls
+title %WizTitle% - %Purpose% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%
@@ -619,8 +638,8 @@ exit /b
 ::-------------------------------------------------------------------------------------------
 :ERROR
 cls
-if %error% equ 0 title %WizTitle% %DispVersion% - %PurposeA% - %DLFinish%
-if %error% gtr 0 title %WizTitle% %DispVersion% - %PurposeA% - %FoundError%
+if %error% equ 0 title %WizTitle% - %PurposeA% - %DLFinish%
+if %error% gtr 0 title %WizTitle% - %PurposeA% - %FoundError%
 
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
@@ -628,131 +647,100 @@ if %error% gtr 0 (color f4&echo.%ErrorTitle%)
 echo.%line%
 echo.
 echo.
-if %error% equ 0 call :finish
-if %error% equ 1 call :aria_error
-if %error% equ 2 call :download_error
-if %error% equ 3 call :uup_error
+if %error% equ 0 (
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.%FLDLD%
+	echo.
+	echo.
+	echo.
+	echo.%FileDirectory%%~dp0UUPs\%FileDirectory2%
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.%FileTips%
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	) else if %error% equ 1 (
+		echo.%ErrorTxt1% %aria2%%ErrorTxt11%
+		echo.
+		echo.
+		echo.
+		echo.%DLAria%
+		echo.
+		echo.https://aria2.github.io/
+		echo.
+		echo.
+		echo.%ErrorTxt2%
+		echo.
+		echo.%FileExample%
+		start https://aria2.github.io/
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+	) else if %error% equ 2 (
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.%ErrorTxt3%
+		echo.
+		echo.
+		echo.%ErrorTxt4%
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+	) else if %error% equ 3 (
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.%ErrorTxt5%%DETECTED_ERROR%
+		echo.
+		echo.
+		echo.%ErrorTxt61%
+		echo.- %ErrorTxt62%
+		echo.- %ErrorTxt63%
+		echo.- %ErrorTxt64%
+		echo.
+		echo.%ErrorTxt7%
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+)
 echo.
 echo.
 echo.%line%
 pause
 exit
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 完成提示
-::-------------------------------------------------------------------------------------------
-:finish
-if %error% equ 0 (
-echo.
-echo.
-echo.
-echo.
-echo.%FLDLD%
-echo.
-echo.
-echo.
-echo.%FileDirectory%%~dp0UUPs\%FileDirectory2%
-echo.
-echo.
-echo.
-echo.
-echo.%FileTips%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 找不到 aria2 提示
-::-------------------------------------------------------------------------------------------
-:aria_error
-if %error% equ 1 (
-echo.%ErrorTxt1% %aria2%%ErrorTxt11%
-echo.
-echo.
-echo.
-echo.%DLAria%
-echo.
-echo.https://aria2.github.io/
-echo.
-echo.
-echo.%ErrorTxt2%
-echo.
-echo.%FileExample%
-start https://aria2.github.io/
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 下载错误提示
-::-------------------------------------------------------------------------------------------
-:download_error
-if %error% equ 2 (
-echo.
-echo.
-echo.
-echo.
-echo.%ErrorTxt3%
-echo.
-echo.
-echo.%ErrorTxt4%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: UUP 下载错误提示
-::-------------------------------------------------------------------------------------------
-:uup_error
-if %error% equ 3 (
-echo.
-echo.
-echo.
-echo.
-echo.%ErrorTxt5%%DETECTED_ERROR%
-echo.
-echo.
-echo.%ErrorTxt61%
-echo.- %ErrorTxt62%
-echo.- %ErrorTxt63%
-echo.- %ErrorTxt64%
-echo.
-echo.%ErrorTxt7%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------

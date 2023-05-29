@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.5"
+set "Ver=4.6"
 set "DispVersion=v%Ver%"
-set "udBuild=830"
+set "udBuild=850"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ if errorlevel 1 (set "cert= "&goto :second)
 ::-------------------------------------------------------------------------------------------
 :second
 cls
-title %WizTitle%- %PurposeA% - %SelectPlat%
+title %WizTitle% - %PurposeA% - %SelectPlat%
 
 echo.%line%
 echo.%PlatTitle%
@@ -198,7 +198,7 @@ if errorlevel 1 goto :clientlang
 ::-------------------------------------------------------------------------------------------
 :clientlang
 cls
-title %WizTitle%- %PurposeA% - %SelectClientLang%
+title %WizTitle% - %PurposeA% - %SelectClientLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -277,7 +277,7 @@ if %SKU% equ b goto :second
 ::-------------------------------------------------------------------------------------------
 :langserver
 cls
-title %WizTitle%- %PurposeA% - %SelectServerLang%
+title %WizTitle% - %PurposeA% - %SelectServerLang%
 
 echo.%line%
 echo.%LangTitle%
@@ -334,7 +334,7 @@ if %Lang% lss 01 goto :unsupportlang
 ::-------------------------------------------------------------------------------------------
 :chooseclientedition
 cls
-title %WizTitle%- %PurposeA% - %SelectSKU1%
+title %WizTitle% - %PurposeA% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -381,7 +381,7 @@ if errorlevel 1 (set SKU=core&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseclienteditiongroup
 cls
-title %WizTitle%- %PurposeA% - %SelectSKUGroup%
+title %WizTitle% - %PurposeA% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -427,7 +427,7 @@ if errorlevel 1 (set "SKU=core;corecountryspecific"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseserveredition
 cls
-title %WizTitle%- %PurposeA% - %SelectSKU1%
+title %WizTitle% - %PurposeA% - %SelectSKU1%
 
 echo.%line%
 echo.%BuildTitle%
@@ -473,7 +473,7 @@ if errorlevel 1 (set "SKU=serverazurestackhcicor"&goto :setupdateid)
 ::-------------------------------------------------------------------------------------------
 :chooseservereditiongroup
 cls
-title %WizTitle%- %PurposeA% - %SelectSKUGroup%
+title %WizTitle% - %PurposeA% - %SelectSKUGroup%
 
 echo.%line%
 echo.%EditionTitle%
@@ -517,7 +517,7 @@ if errorlevel 1 (set "SKU=serverstandardcore;serverdatacentercore"&goto :setupda
 ::-------------------------------------------------------------------------------------------
 :unsupportclientlang
 cls
-title %WizTitle%- %PurposeA% - %UnsupportedLang%
+title %WizTitle% - %PurposeA% - %UnsupportedLang%
 color f4
 echo.%line%
 echo.%WarTitle%
@@ -556,7 +556,7 @@ if errorlevel 1 goto :clientlang
 ::-------------------------------------------------------------------------------------------
 :unsupportserverlang
 cls
-title %WizTitle%- %PurposeA% - %UnsupportedLang%
+title %WizTitle% - %PurposeA% - %UnsupportedLang%
 color f4
 echo.%line%
 echo.%WarTitle%
@@ -595,7 +595,7 @@ if errorlevel 1 (color f0 & goto :langserver)
 ::-------------------------------------------------------------------------------------------
 :setupdateid
 cls
-title %WizTitle%- %PurposeA% - %WriteBuildID%
+title %WizTitle% - %PurposeA% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -627,7 +627,7 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle0%
@@ -673,7 +673,7 @@ if errorlevel 1 goto :chooseupdateidteamrs2
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -745,7 +745,7 @@ if %Team% equ a goto :chooseupdateidteamrs2x86
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2x86
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -815,7 +815,7 @@ if %Team% equ a goto :chooseupdateidteamrs2
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamrs2arm64
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle1%
@@ -868,7 +868,7 @@ if %Team% equ a goto :chooseupdateidteamrs2x86
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamvb
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle2%
@@ -912,7 +912,7 @@ if errorlevel 1 (set id=300ae013-034b-4cf7-9ed5-d64da6099127&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam20H2
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle3%
@@ -954,7 +954,7 @@ if errorlevel 1 (set id=bbcdbf02-fd0f-497f-9d01-956bec5f9c13&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteam22H2
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle4%
@@ -1002,7 +1002,7 @@ if errorlevel 1 (set id=2bbf5b05-bddf-4121-bb3d-01c9dff6986e&goto :uupdownload)
 ::-------------------------------------------------------------------------------------------
 :chooseupdateidteamDev
 cls
-title %WizTitle%- %PurposeA% - %SelectTeamID%
+title %WizTitle% - %PurposeA% - %SelectTeamID%
 
 echo.%line%
 echo.%TeamTitle5%
@@ -1083,7 +1083,7 @@ if %Team% equ b goto :chooseupdateidteam
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle%- %PurposeA% - %SearchUpdScript%
+title %WizTitle% - %PurposeA% - %SearchUpdScript%
 
 cd /d "%~dp0"
 if NOT EXIST %aria2% set error=1&goto :ERROR
@@ -1098,7 +1098,7 @@ for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle%- %PurposeA% - %DLUUPFiles%
+title %WizTitle% - %PurposeA% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%
@@ -1126,138 +1126,107 @@ exit /b
 cls
 if %error% equ 0 title %WizTitle% - %PurposeA% - %DLFinish%
 if %error% gtr 0 title %WizTitle% - %PurposeA% - %FoundError%
-color f4
+
 echo.%line%
 if %error% equ 0 (color f0&echo %FinishTitle%)
 if %error% gtr 0 (color f4&echo.%ErrorTitle%)
 echo.%line%
 echo.
 echo.
-if %error% equ 0 call :finish
-if %error% equ 1 call :aria_error
-if %error% equ 2 call :download_error
-if %error% equ 3 call :uup_error
+if %error% equ 0 (
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.%FLDLD%
+	echo.
+	echo.
+	echo.
+	echo.%FileDirectory%%~dp0UUPs\%FileDirectory2%
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.%FileTips%
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	echo.
+	) else if %error% equ 1 (
+		echo.%ErrorTxt1% %aria2%%ErrorTxt11%
+		echo.
+		echo.
+		echo.
+		echo.%DLAria%
+		echo.
+		echo.https://aria2.github.io/
+		echo.
+		echo.
+		echo.%ErrorTxt2%
+		echo.
+		echo.%FileExample%
+		start https://aria2.github.io/
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+	) else if %error% equ 2 (
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.%ErrorTxt3%
+		echo.
+		echo.
+		echo.%ErrorTxt4%
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+	) else if %error% equ 3 (
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.%ErrorTxt5%%DETECTED_ERROR%
+		echo.
+		echo.
+		echo.%ErrorTxt61%
+		echo.- %ErrorTxt62%
+		echo.- %ErrorTxt63%
+		echo.- %ErrorTxt64%
+		echo.
+		echo.%ErrorTxt7%
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+)
 echo.
 echo.
 echo.%line%
 pause
-goto :EOF
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 完成提示
-::-------------------------------------------------------------------------------------------
-:finish
-if %error% equ 0 (
-echo.
-echo.
-echo.
-echo.
-echo.%FLDLD%
-echo.
-echo.
-echo.
-echo.%FileDirectory%%~dp0UUPs\%FileDirectory2%
-echo.
-echo.
-echo.
-echo.
-echo.%FileTips%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 找不到 aria2 提示
-::-------------------------------------------------------------------------------------------
-:aria_error
-if %error% equ 1 (
-echo.%ErrorTxt1% %aria2%%ErrorTxt11%
-echo.
-echo.
-echo.
-echo.%DLAria%
-echo.
-echo.https://aria2.github.io/
-echo.
-echo.
-echo.%ErrorTxt2%
-echo.
-echo.%FileExample%
-start https://aria2.github.io/
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: 下载错误提示
-::-------------------------------------------------------------------------------------------
-:download_error
-if %error% equ 2 (
-echo.
-echo.
-echo.
-echo.
-echo.%ErrorTxt3%
-echo.
-echo.
-echo.%ErrorTxt4%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
-::-------------------------------------------------------------------------------------------
-
-::-------------------------------------------------------------------------------------------
-:: UUP 下载错误提示
-::-------------------------------------------------------------------------------------------
-:uup_error
-if %error% equ 3 (
-echo.
-echo.
-echo.
-echo.
-echo.%ErrorTxt5%%DETECTED_ERROR%
-echo.
-echo.
-echo.%ErrorTxt61%
-echo.- %ErrorTxt62%
-echo.- %ErrorTxt63%
-echo.- %ErrorTxt64%
-echo.
-echo.%ErrorTxt7%
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-)
+exit
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
