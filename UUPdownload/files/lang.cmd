@@ -17,8 +17,8 @@ pause>nul
 exit /b
 
 :langver
-set "LVer=4.4"
-set "LVerMax=Build 800"
+set "LVer=4.6"
+set "LVerMax=Build 850"
 set "LMVerMax=1.0"
 set "LVerMin=Build 772"
 set "LMVerMin=0"
@@ -471,7 +471,7 @@ set "ErrorTxt5=无法从 Windows 更新服务器检索数据。原因："
 set "ErrorTxt61=可能的原因："
 set "ErrorTxt62=更新 ID 不支持所选语言。"
 set "ErrorTxt63=此更新 ID 对应的更新已被 Microsoft 官方撤回。"
-set "ErrorTxt64=缺少文件，这可能和你正在尝试下载的更新尚未提供包含有关可用语言、版本和文件的完整信息。&echo."
+set "ErrorTxt64=缺少文件，这可能是因为你正在尝试下载的更新尚未提供包含有关可用语言、版本和文件的完整信息。&echo."
 set "ErrorTxt7=如果此问题仍持续存在，建议你更换一个有效更新 ID。&echo."
 set "ErrorTxt8=我们无法找到此脚本所需的文件。"
 set "ErrorTxt9=如果你希望补充缺失的文件，可以在补充文件后再次执行。"
