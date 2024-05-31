@@ -22,9 +22,9 @@ set "all_proxy="
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.6"
+set "Ver=4.7"
 set "DispVersion=v%Ver%"
-set "udBuild=850"
+set "udBuild=870"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
 echo.%EditionApplicableDesA%%PurposeA%%EditionApplicableDesB%
 echo.
-echo.^(c^) 2016-2023 %CopyRight%
+echo.^(c^) 2016-2024 %CopyRight%
 echo.%VerDes%
 echo.%line2%
 choice /c 12 /n /m "%dlangtxt%"
@@ -107,13 +107,13 @@ set "DLUUPFiles=%DLUUPFiles%"
 set "FoundError=%FoundError%"
 ::-------------------------------------------------------------------------------------------
 
+title %WizTitle% - %PurposeA%
+
 ::-------------------------------------------------------------------------------------------
 :: 网络预先设置
 ::-------------------------------------------------------------------------------------------
 :first
 cls
-title %WizTitle% - %PurposeA%
-
 if exist aria2_download.log del /s /q aria2_download.log
 if exist files\aria2_script.*.txt del /s /q files\aria2_script.*.txt
 
@@ -141,14 +141,57 @@ echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
 echo.%EditionApplicableDesA%%PurposeA%%EditionApplicableDesB%
 echo.
-echo.^(c^) 2016-2023 %CopyRight%
+echo.^(c^) 2016-2024 %CopyRight%
 echo.%VerDes%
 echo.
 echo.%line%
 choice /c ABC /n /m "%TxtDes1%"
 if errorlevel 3 (start https://uupdump.net/known.php%langsite%&goto :first)
-if errorlevel 2 (set "cert=--check-certificate=false "&goto :second)
-if errorlevel 1 (set "cert= "&goto :second)
+if errorlevel 2 (set "cert=--check-certificate=false "&goto :siteselect)
+if errorlevel 1 (set "cert= "&goto :siteselect)
+::-------------------------------------------------------------------------------------------
+
+title %WizTitle% - %PurposeA%
+
+::-------------------------------------------------------------------------------------------
+:: 网站来源选择
+::-------------------------------------------------------------------------------------------
+:siteselect
+
+cls
+echo %line%
+echo %WelcomeTitle%
+echo %line%
+echo %SelDes%
+echo.
+echo.
+echo.
+echo.    A - uupdump.net
+echo.
+echo.    B - uup.rg-adguard.net
+echo.
+echo.    C - www.uupdump.cn
+echo.
+echo.    D - www.osdump.com
+echo.
+echo.    E - %LSUUP%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.%line%
+choice /c ABCD /n /m "%TxtDes1%"
+if errorlevel 5 (set "uupsite=http://127.0.0.1:44715/get.php?"&goto :second)
+if errorlevel 4 (set "uupsite=https://www.osdump.com/get.php?"&goto :second)
+if errorlevel 3 (set "uupsite=https://www.uupdump.cn/get.php?"&goto :second)
+if errorlevel 2 (set "uupsite=https://uup.rg-adguard.net/api/GetFiles?"&goto :second)
+if errorlevel 1 (set "uupsite=https://uupdump.net/get.php?"&goto :second)
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -577,7 +620,7 @@ if defined UUPLIST goto :loop
 ::-------------------------------------------------------------------------------------------
 :uupdownload
 cls
-title %WizTitle% - %Purpose% - %SearchUpdAPPScript%
+title %WizTitle% - %PurposeA% - %SearchUpdAPPScript%
 
 cd /d "%~dp0"
 if NOT EXIST %aria2% call :DOWNLOAD_ARIA2 || (echo %ardlf% & exit /b)
@@ -585,14 +628,14 @@ if NOT EXIST %aria2% call :DOWNLOAD_ARIA2 || (echo %ardlf% & exit /b)
 echo.%line%
 echo %APPDScript%
 echo.%line%
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=neutral&edition=app&aria2=2"
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "%uupsite%id=%id%&pack=neutral&edition=app&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% - %Purpose% - %DLAPPFiles%
+title %WizTitle% - %PurposeA% - %DLAPPFiles%
 echo.%line%
 echo %APPDFiles%
 echo.%line%
@@ -600,18 +643,18 @@ echo.%line%
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 cls
-title %WizTitle% - %Purpose% - %SearchUpdScript%
+title %WizTitle% - %PurposeA% - %SearchUpdScript%
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "%uupsite%id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
 if NOT [%DETECTED_ERROR%] == [] (set error=3&call :ERROR)
 
 cls
-title %WizTitle% - %Purpose% - %DLUUPFiles%
+title %WizTitle% - %PurposeA% - %DLUUPFiles%
 
 echo.%line%
 echo.%DLFiles%

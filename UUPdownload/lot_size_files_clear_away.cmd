@@ -2,6 +2,7 @@
 
 if exist UUPs\*. del /s /q UUPs\*.
 if exist UUPs\*.esd del /s /q UUPs\*.esd
+if exist UUPs\*.wim del /s /q UUPs\*.wim
 if exist UUPs\*.cab del /s /q UUPs\*.cab
 if exist UUPs\*.msu del /s /q UUPs\*.msu
 if exist UUPs\*.psf del /s /q UUPs\*.psf
