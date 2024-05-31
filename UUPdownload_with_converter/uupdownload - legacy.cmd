@@ -28,9 +28,9 @@ call files\lang.cmd -en
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.6"
+set "Ver=4.7"
 set "DispVersion=v%Ver%"
-set "udBuild=850"
+set "udBuild=870"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ echo %line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
 echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo ^(c^) 2016-2023 %CopyRight%
+echo ^(c^) 2016-2024 %CopyRight%
 echo %VerDes%
 echo %line2%
 choice /c 12 /n /m "%dlangtxt%"
@@ -170,6 +170,7 @@ if exist multi_arch_iso.cmd del /s /q multi_arch_iso.cmd
 if exist create_virtual_editions.cmd del /s /q create_virtual_editions.cmd
 if exist convert-UUP.cmd del /s /q convert-UUP.cmd
 if exist bin rd /s /q bin
+
 cls
 echo %line%
 echo %WelcomeTitle%
@@ -199,9 +200,52 @@ echo.%VerDes%
 echo.
 echo.%line%
 choice /c ABC /n /m "%TxtDes1%"
-if errorlevel 3 (start https://uupdump.net/known.php?lang=zh-cn&goto :first)
-if errorlevel 2 (set "cert=--check-certificate=false "&goto :second)
-if errorlevel 1 (set "cert= "&goto :second)
+if errorlevel 3 (start https://uupdump.net/known.php%langsite%&goto :first)
+if errorlevel 2 (set "cert=--check-certificate=false "&goto :siteselect)
+if errorlevel 1 (set "cert= "&goto :siteselect)
+::-------------------------------------------------------------------------------------------
+
+title %WizTitle% - %PurposeA%
+
+::-------------------------------------------------------------------------------------------
+:: 网站来源选择
+::-------------------------------------------------------------------------------------------
+:siteselect
+
+cls
+echo %line%
+echo %WelcomeTitle%
+echo %line%
+echo %SelDes%
+echo.
+echo.
+echo.
+echo.    A - uupdump.net
+echo.
+echo.    B - www.osdump.com
+echo.
+echo.    C - uup.rg-adguard.net
+echo.
+echo.    D - www.uupdump.cn
+echo.
+echo.    E - %LSUUP%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.%line%
+choice /c ABCDE /n /m "%TxtDes1%"
+if errorlevel 5 (set "uupsite=http://127.0.0.1:44715/get.php?"&goto :second)
+if errorlevel 4 (set "uupsite=https://www.uupdump.cn/get.php?"&goto :second)
+if errorlevel 3 (set "uupsite=https://uup.rg-adguard.net/api/GetFiles?"&goto :second)
+if errorlevel 2 (set "uupsite=https://www.osdump.com/get.php?"&goto :second)
+if errorlevel 1 (set "uupsite=https://uupdump.net/get.php?"&goto :second)
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -555,12 +599,13 @@ echo %line2%
 echo %editiongroup7%
 echo.
 echo    5 - %ServerSCSDCD%
-echo.
+echo.   6 - %ServerALL%
 echo %StepDescription%
 echo %line%
-choice /c 12345AB /n /m "%TxtDes1%"
-if errorlevel 7 goto :first
-if errorlevel 6 goto :chooseserveredition
+choice /c 123456AB /n /m "%TxtDes1%"
+if errorlevel 8 goto :first
+if errorlevel 7 goto :chooseserveredition
+if errorlevel 6 (set "SKU=serverstandardcore;serverstandard;serverturbine;serverturbinecore;serverdatacentercore;serverdatacenter"&goto :setupdateid)
 if errorlevel 5 (set "SKU=serverstandardcore;serverstandard;serverdatacentercore;serverdatacenter"&goto :setupdateid)
 if errorlevel 4 (set "SKU=serverdatacentercore;serverdatacenter"&goto :setupdateid)
 if errorlevel 3 (set "SKU=serverstandardcore;serverstandard"&goto :setupdateid)
@@ -1069,13 +1114,13 @@ echo. 16 - 19100.1055 ^| 17 - 19100.1057 ^| 18 - 19100.1060 ^| 19 - 19100.1062 ^
 echo. 21 - 19100.1065 ^| 22 - 19100.1066 ^| 23 - 19100.1067 ^| 24 - 19100.1070 ^| 25 - 19100.1079
 echo. 26 - 19100.1085 ^| 27 - 19100.1086 ^| 28 - 19100.1089 ^| 29 - 19100.1090 ^| 30 - 19101.1109
 echo. 31 - 19101.1112 ^| 32 - 19101.1116 ^| 33 - 19100.1117 ^| 34 - 19100.1120 ^| 35 - 19100.1121
-echo. 36 - 19101.1122 ^| 37 - 19101.1123 ^| 38 - 19100.1125 ^| 39 - 19100.1127
+echo. 36 - 19101.1122 ^| 37 - 19101.1123 ^| 38 - 19100.1125 ^| 39 - 19100.1127 ^| 40 - 19100.1133
+echo. 41 - 19101.1136 ^| 42 - 19101.1137 ^| 43 - 19101.1140 ^| 44 - 19101.1145 ^| 45 - 19101.1146
+echo. 46 - 19101.1151
 echo.%line3%
 echo.%TeamSVC%
 echo.
-echo. E1 - 19100.1045 ^| E2 - 19101.1125
-echo.
-echo.
+echo. E1 - 19100.1045 ^| E2 - 19101.1125 ^| E3 - 19101.1140
 echo.
 echo.
 echo.
@@ -1087,8 +1132,16 @@ echo.
 echo.%StepDescription2%
 echo.%line%
 set /p Team=%TxtDes1%
+if %Team% equ E3 (set id=17a4a71c-b861-4404-84da-279146946165&goto :uupdownload)
 if %Team% equ E2 (set id=b85bdd30-54f8-4166-91bd-2007c75ed3e3&goto :uupdownload)
 if %Team% equ E1 (set id=24fd32a8-3585-46f8-b356-7fdc6d016a93&goto :uupdownload)
+if %Team% equ 46 (set id=d1f8863e-e229-4341-a879-f1b77fd3f310&goto :uupdownload)
+if %Team% equ 45 (set id=cdc88e31-a304-4e1c-b997-64403277285d&goto :uupdownload)
+if %Team% equ 44 (set id=406ee6bc-3202-4422-8c9c-c4aac428a23f&goto :uupdownload)
+if %Team% equ 43 (set id=f948dc34-c3ba-48c4-8138-fb2b29a306ea&goto :uupdownload)
+if %Team% equ 42 (set id=ad59d2c6-3e87-45d7-8622-4f9ca4f975e2&goto :uupdownload)
+if %Team% equ 41 (set id=50700b06-7902-4362-acca-ba2cb0b58180&goto :uupdownload)
+if %Team% equ 40 (set id=182cfbbe-cc49-4440-a4f1-62457c3c4d52&goto :uupdownload)
 if %Team% equ 39 (set id=c2023395-8c48-47c0-bcc0-ee799bd084c9&goto :uupdownload)
 if %Team% equ 38 (set id=ad0a4637-7a81-4f95-8617-3b65fa53df60&goto :uupdownload)
 if %Team% equ 37 (set id=ca2723ff-1574-4277-a377-85912f60590e&goto :uupdownload)
@@ -1097,6 +1150,7 @@ if %Team% equ 35 (set id=b16a4423-3920-4a7e-a9ff-70ac1f8819ce&goto :uupdownload)
 if %Team% equ 34 (set id=bb92e6b8-83ae-4ca7-832a-350e45fd6d41&goto :uupdownload)
 if %Team% equ 33 (set id=794402a4-95ef-436a-9697-308547ccd8ce&goto :uupdownload)
 if %Team% equ 32 (set id=7b1233a6-3b75-4248-ae7c-a70a288e19aa&goto :uupdownload)
+if %Team% equ 31 (set id=3c9f01e3-501c-40fd-bcd2-751b9e6332ee&goto :uupdownload)
 if %Team% equ 30 (set id=373a32fd-5a69-47d1-a5bb-e80f19b93820&goto :uupdownload)
 if %Team% equ 29 (set id=53794d88-eed7-4baf-a2eb-a427a15cc5d7&goto :uupdownload)
 if %Team% equ 28 (set id=4ff82994-69ba-4bec-ab26-3383a1d0fc90&goto :uupdownload)
@@ -1142,7 +1196,7 @@ title %WizTitle% - %PurposeB% - %SearchUpdScript%
 echo %line%
 echo %UPDScript%
 echo %line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "%uupsite%id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i

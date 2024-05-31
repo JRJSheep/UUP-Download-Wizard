@@ -29,9 +29,9 @@ call files\lang.cmd -en
 ::-------------------------------------------------------------------------------------------
 :: 版本指示内容
 ::-------------------------------------------------------------------------------------------
-set "Ver=4.6"
+set "Ver=4.7"
 set "DispVersion=v%Ver%"
-set "udBuild=850"
+set "udBuild=870"
 set "udRevision=1"
 set LVer=1 && call :langver
 ::-------------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ echo %line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
 echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
 echo.
-echo ^(c^) 2016-2023 %CopyRight%
+echo ^(c^) 2016-2024 %CopyRight%
 echo %VerDes%
 echo %line2%
 choice /c 12 /n /m "%dlangtxt%"
@@ -199,16 +199,59 @@ echo.
 echo.%WizInfo%
 echo.%line2%
 echo.%WizVer% %Ver% ^(%Build% %udBuild%.%udRevision%^)  %LangVer%%LVerMax%.%LMVerMax%
-echo.%EditionApplicableDesA%%PurposeB%%EditionApplicableDesB%
+echo.%EditionApplicableDesA%%PurposeA%%EditionApplicableDesB%
 echo.
-echo.^(c^) 2016-2023 %CopyRight%
+echo.^(c^) 2016-2024 %CopyRight%
 echo.%VerDes%
 echo.
 echo.%line%
 choice /c ABC /n /m "%TxtDes1%"
-if errorlevel 3 (start https://uupdump.net/known.php?lang=zh-cn&goto :first)
-if errorlevel 2 (set "cert=--check-certificate=false "&goto :second)
-if errorlevel 1 (set "cert= "&goto :second)
+if errorlevel 3 (start https://uupdump.net/known.php%langsite%&goto :first)
+if errorlevel 2 (set "cert=--check-certificate=false "&goto :siteselect)
+if errorlevel 1 (set "cert= "&goto :siteselect)
+::-------------------------------------------------------------------------------------------
+
+title %WizTitle% - %PurposeA%
+
+::-------------------------------------------------------------------------------------------
+:: 网站来源选择
+::-------------------------------------------------------------------------------------------
+:siteselect
+
+cls
+echo %line%
+echo %WelcomeTitle%
+echo %line%
+echo %SelDes%
+echo.
+echo.
+echo.
+echo.    A - uupdump.net
+echo.
+echo.    B - uup.rg-adguard.net
+echo.
+echo.    C - www.uupdump.cn
+echo.
+echo.    D - www.osdump.com
+echo.
+echo.    E - %LSUUP%
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.%line%
+choice /c ABCD /n /m "%TxtDes1%"
+if errorlevel 5 (set "uupsite=http://127.0.0.1:44715/get.php?"&goto :second)
+if errorlevel 4 (set "uupsite=https://www.osdump.com/get.php?"&goto :second)
+if errorlevel 3 (set "uupsite=https://www.uupdump.cn/get.php?"&goto :second)
+if errorlevel 2 (set "uupsite=https://uup.rg-adguard.net/api/GetFiles?"&goto :second)
+if errorlevel 1 (set "uupsite=https://uupdump.net/get.php?"&goto :second)
 ::-------------------------------------------------------------------------------------------
 
 ::-------------------------------------------------------------------------------------------
@@ -602,7 +645,7 @@ if %choosemenu% equ 1 (color f0 & goto :langserver)
 ::-------------------------------------------------------------------------------------------
 :setupdateid
 cls
-title %WizTitle% - %PurposeB% - %WriteBuildID%
+title %WizTitle% - %PurposeA% - %WriteBuildID%
 
 echo.%line%
 echo.%FillIDTitle%
@@ -640,7 +683,7 @@ title %WizTitle% - %PurposeB% - %SearchUpdScript%
 echo.%line%
 echo %APPDScript%
 echo.%line%
-"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=neutral&edition=app&aria2=2"
+"%aria2%" --no-conf --log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "%uupsite%id=%id%&pack=neutral&edition=app&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
@@ -656,7 +699,7 @@ cls
 echo.%line%
 echo.%UPDScript%
 echo.%line%
-"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "https://uupdump.net/get.php?id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
+"%aria2%" --no-conf %cert%--log-level=info --log="aria2_download.log" -o"%aria2Script%" --allow-overwrite=true --auto-file-renaming=false "%uupsite%id=%id%&pack=%Lang%&edition=%SKU%&aria2=2"
 if %ERRORLEVEL% GTR 0 set error=2&call :ERROR & exit /b 1
 
 for /F "tokens=2 delims=:" %%i in ('findstr #UUPDUMP_ERROR: "%aria2Script%"') do set DETECTED_ERROR=%%i
