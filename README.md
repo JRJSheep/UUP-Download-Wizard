@@ -86,17 +86,17 @@ E - Build 19100.1009<br>
 注意事项
 ===============================================================================
 
-对于所需的更新 ID，可在 https://uupdump.net/zh-cn/known.php 中进行查阅。
+对于所需的更新 ID，可在 https://uupdump.net/known.php?lang=zh-cn 中进行查阅。
 
 提供部分更新 ID 链接示例，这些均为可用 ID：<br>
-针对 Windows 10 的功能更新，版本 2004 (19041.450) x64 https://uupdump.net/zh-cn/selectlang.php?id=5afffb9b-fb87-4242-b66a-4eceeb1cf75f<br>
-针对 Windows 10 的功能更新，版本 2004 (19041.450) x86 https://uupdump.net/zh-cn/selectlang.php?id=b58662d4-d5e6-44fc-8cdb-faaade4d4f72
+针对 Windows 10 的功能更新，版本 2004 (19041.450) x64 https://uupdump.net/selectlang.php?id=5afffb9b-fb87-4242-b66a-4eceeb1cf75f<br>
+针对 Windows 10 的功能更新，版本 2004 (19041.450) x86 https://uupdump.net/selectlang.php?id=b58662d4-d5e6-44fc-8cdb-faaade4d4f72
 
-针对 Windows 10 的功能更新，版本 1909（18363.1016）x64 https://uupdump.net/zh-cn/selectlang.php?id=20c86252-ea52-437b-ae96-bf79cda4a639<br>
-针对 Windows 10 的功能更新，版本 1909（18363.1016）x86 https://uupdump.net/zh-cn/selectlang.php?id=5cac3fad-0b9e-4fc1-8b87-4c3e678b2417
+针对 Windows 10 的功能更新，版本 1909（18363.1016）x64 https://uupdump.net/selectlang.php?id=20c86252-ea52-437b-ae96-bf79cda4a639<br>
+针对 Windows 10 的功能更新，版本 1909（18363.1016）x86 https://uupdump.net/selectlang.php?id=5cac3fad-0b9e-4fc1-8b87-4c3e678b2417
 
-针对 Windows 10 的功能更新，版本 1903 (18362.1016) x64 https://uupdump.net/zh-cn/selectlang.php?id=b8f49a21-3249-429f-a96c-d26d5b42c262<br>
-针对 Windows 10 的功能更新，版本 1903 (18362.1016) x86 https://uupdump.net/zh-cn/selectlang.php?id=cec8edcc-2794-4b44-940b-b44b08eb8892
+针对 Windows 10 的功能更新，版本 1903 (18362.1016) x64 https://uupdump.net/selectlang.php?id=b8f49a21-3249-429f-a96c-d26d5b42c262<br>
+针对 Windows 10 的功能更新，版本 1903 (18362.1016) x86 https://uupdump.net/selectlang.php?id=cec8edcc-2794-4b44-940b-b44b08eb8892
 
 贡献者（感谢）
 ===============================================================================
